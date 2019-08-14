@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "zorro-sharper": [
+        "dist/zorro-sharper"
+      ],
+      "zorro-sharper/*": [
+        "dist/zorro-sharper/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
