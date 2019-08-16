@@ -1,0 +1,69 @@
+<h1>自适应高度卡片</h1>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="6">
+    <nz-card nsAutoHeightCard nzHoverable nzTitle="自适应高度卡片">
+      <p>只需添加 “nsAutoHeightCard” 指令即可让 nz-card 底部延展到页面底部，示例：</p>
+      <pre>
+&lt;nz-card <b>nsAutoHeightCard</b> nzTitle=&quot;自适应高度卡片&quot;&gt;
+  &lt;p&gt;Card content&lt;/p&gt;
+&lt;/nz-card&gt;
+    </pre
+      >
+    </nz-card>
+  </div>
+  <div nz-col nzSpan="6">
+    <nz-card nsAutoHeightCard nzHoverable nzTitle="自适应高度卡片">
+      <p><b>卡片内容较多时，显示内部滚动条。</b></p>
+      <p>“沙漠是美的。”他又说道。</p>
+      <p>
+        确实如此。我一直很喜欢沙漠。坐在一个沙丘上，什么也看不见、听不见。
+        但是，却有一种说不出的东西在默默地放着光芒……
+      </p>
+      <p>“使沙漠更加美丽的，就是在某个角落里，藏着一口井……”</p>
+      <p>
+        我很惊讶，突然明白了为什么沙漠放着光芒。当我还是一个小孩子的时候，
+        我住在一座古老的房子里，而且传说，这个房子里埋藏着一个宝贝。当然，从来
+        没有任何人能发现这个宝贝，可能，甚至也没有人去寻找过。但是，这个宝贝使
+        整个房子着了魔似的。我家的房子在它的心灵深处隐藏着一个秘密……
+      </p>
+      <p>我对小王子说道：“是的，无论是房子，星星，或是沙漠，使它们美丽的东 西是看不见的！”</p>
+      <p>“我真高兴，你和我的狐狸的看法一样。”小王子说。</p>
+      <p>
+        小王子睡觉了，我就把他抱在怀里，又重新上路了。我很激动。就好象抱着
+        一个脆弱的宝贝。就好象在地球上没有比这更脆弱的了。我借着月光看着这惨白
+        的面额，这双紧闭的眼睛，这随风飘动的绺绺头发，这时我对自己说道：“我所
+        看到的仅仅是外表。最重要的是看不见的……”
+      </p>
+      <p>
+        由于看到他稍稍张开的嘴唇露出一丝微笑，我又自言自语地说：“在这个熟
+        睡了的小王子身上，使我非常感动的，是他对他那朵花的忠诚，是在他心中闪烁
+        的那朵玫瑰花的形象。这朵玫瑰花，即使在小王子睡着了的时候，也象一盏灯的
+        火焰一样在他身上闪耀着光辉……”这时，我就感觉到他更加脆弱。应该保护灯焰：
+        一阵风就可能把它吹灭……
+      </p>
+      <p>于是，就这样走着，我在黎明时发现了水井。</p>
+    </nz-card>
+  </div>
+  <div nz-col nzSpan="6">
+    <nz-input-group [nzSuffix]="suffixIconSearch" style="margin-bottom: 8px;">
+      <input type="text" nz-input placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+    <nz-card nsAutoHeightCard nzHoverable nzTitle="自适应高度卡片">
+      <p>无论卡片顶部在何处，底部都能对齐。</p>
+    </nz-card>
+  </div>
+  <div nz-col nzSpan="6">
+    <nz-card nsAutoHeightCard="100" nzHoverable nzTitle="自适应高度卡片">
+      <p>也可以自定义到页面底部的距离，示例：</p>
+      <pre>
+&lt;nz-card <b>nsAutoHeightCard="100"</b> nzTitle=&quot;自适应高度卡片&quot;&gt;
+  &lt;p&gt;Card content&lt;/p&gt;
+&lt;/nz-card&gt;
+    </pre
+      >
+    </nz-card>
+  </div>
+</div>

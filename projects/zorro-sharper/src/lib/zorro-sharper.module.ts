@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
-import { ZorroSharperComponent } from './zorro-sharper.component';
+import { NgModule } from "@angular/core";
+import { NsAutoHeightCardDirective } from "./directives/ns-auto-height-card.directive";
 
-
+const DIRECTIVES = [NsAutoHeightCardDirective];
 
 @NgModule({
-  declarations: [ZorroSharperComponent],
-  imports: [
-  ],
-  exports: [ZorroSharperComponent]
+  declarations: [...DIRECTIVES],
+  imports: [],
+  exports: [...DIRECTIVES]
 })
-export class ZorroSharperModule { }
+export class ZorroSharperModule {}
