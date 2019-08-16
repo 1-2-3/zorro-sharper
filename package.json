@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve -o",
     "build": "ng build",
+    "build-doc": "ng build --prod --base-href 'https://1-2-3.github.io/zorro-sharper/'",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
