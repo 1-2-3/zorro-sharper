@@ -4,8 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build": "ng build",
-    "build-doc": "ng build --prod --base-href 'https://1-2-3.github.io/zorro-sharper/'",
+    "build": "ng build --prod",
+    "build-lib": "ng build zorro-sharper",
+    "build-doc": "ng build zorro-sharper-doc --prod --base-href 'https://1-2-3.github.io/zorro-sharper/'",
+    "pub-doc": "ngh --dir dist/zorro-sharper-doc --name zahuifan --no-silent --dry-run",
+    "dp": "ng run zorro-sharper-doc:deploy --dry-run",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -24,7 +27,7 @@
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1",
-    "zorro-sharper": "^0.0.3"
+    "zorro-sharper": "^0.0.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.802.1",
