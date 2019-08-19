@@ -7,7 +7,7 @@
     "build": "ng build --prod",
     "build-lib": "ng build zorro-sharper",
     "build-doc": "ng build zorro-sharper-doc --prod --base-href 'https://1-2-3.github.io/zorro-sharper/'",
-    "pub-doc": "ngh --dir dist/zorro-sharper-doc --name zahuifan --no-silent --dry-run",
+    "pub-doc": "angular-cli-ghpages --dir dist/zorro-sharper-doc --branch master --no-silent --dry-run",
     "dp": "ng run zorro-sharper-doc:deploy --dry-run",
     "test": "ng test",
     "lint": "ng lint",
