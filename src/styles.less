@@ -210,7 +210,7 @@
 
 // Layout
 @layout-body-background : #f0f2f5;
-@layout-header-background : #001529;
+@layout-header-background : #fff; //#001529;
 @layout-footer-background : @layout-body-background;
 @layout-header-height : 64px;
 @layout-header-padding : 0 50px;
@@ -543,4 +543,44 @@
 /* You can add global styles to this file, and also import other style files */
 .ant-layout-content {
   margin: 0px !important;
+}
+
+/* div 内部滚动条样式 */
+
+div::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: #8c8c8c; //#cecece; // #A6A6A6;
+  outline: 1px solid #333;
+  border-radius: 4px;
+}
+
+// div::-webkit-scrollbar-track {
+//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+// }
+/* 下拉框内部滚动条样式 */
+
+ul::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: #8c8c8c; // #cecece; // #A6A6A6;
+  outline: 1px solid #333;
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background-color: #8c8c8c; //#cecece; // #A6A6A6;
+  outline: 1px solid #333;
+  border-radius: 4px;
 }

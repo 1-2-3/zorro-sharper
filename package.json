@@ -6,9 +6,7 @@
     "start": "ng serve -o",
     "build": "ng build --prod",
     "build-lib": "ng build zorro-sharper",
-    "build-doc": "ng build zorro-sharper-doc --prod --base-href /zorro-sharper/",
-    "pub-doc": "angular-cli-ghpages --dir dist/zorro-sharper-doc --branch master --no-silent --dry-run",
-    "dp": "ng run zorro-sharper-doc:deploy --dry-run",
+    "build-doc": "ng build zorro-sharper-doc --prod --base-href /zorro-sharper/ && dir && del /S /F /Q docs\\*.* && xcopy /s /e /i /y dist\\zorro-sharper-doc\\*.* docs\\",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
