@@ -1,27 +1,38 @@
-# ZorroSharper
+# ZORRO Sharper
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
+> 针对 ng-zorro-antd 组件库的轻量级增强指令、组件集。
 
-## Development server
+[![](https://img.shields.io/npm/v/zorro-sharper)](https://www.npmjs.com/package/zorro-sharper)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+使用超级轻量化的方式来增强、简化 [ZORRO 组件](https://github.com/NG-ZORRO/ng-zorro-antd)。
 
-## Code scaffolding
+## 安装
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```sh
+npm install zorro-sharper --save
+```
 
-## Build
+## 使用
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+在每一个需要使用组件的 module 中引入 ZorroSharperModule。
 
-## Running unit tests
+```ts
+import { NgModule } from "@angular/core";
+import { NgZorroAntdModule } from "ng-zorro-antd";
+import { ZorroSharperModule } from "zorro-sharper";
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  imports: [NgZorroAntdModule, ZorroSharperModule],
+  declarations: [],
+  exports: []
+})
+export class DirectiveDemoModule {}
+```
 
-## Running end-to-end tests
+在需要的地方使用指令或组件。
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```ts
+<nz-card nsAutoHeightCard nzHoverable nzTitle="自适应高度卡片">
+  <p>只需添加 “nsAutoHeightCard” 指令即可让 nz-card 底部延展到页面底部.</p>
+</nz-card>
+```
