@@ -51,6 +51,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+@angular/cdk/scrolling
+
 @angular/common
 MIT
 
@@ -133,29 +135,43 @@ ng-zorro-antd/button
 
 ng-zorro-antd/card
 
+ng-zorro-antd/checkbox
+
 ng-zorro-antd/drawer
 
 ng-zorro-antd/dropdown
 
+ng-zorro-antd/empty
+
 ng-zorro-antd/input
-
-ng-zorro-antd/message
-
-undefined
 
 ng-zorro-antd/layout
 
 ng-zorro-antd/menu
 
+ng-zorro-antd/message
+
 ng-zorro-antd/modal
 
 ng-zorro-antd/notification
+
+ng-zorro-antd/pagination
 
 ng-zorro-antd/popconfirm
 
 ng-zorro-antd/popover
 
+ng-zorro-antd/radio
+
+ng-zorro-antd/select
+
+ng-zorro-antd/spin
+
+ng-zorro-antd/table
+
 ng-zorro-antd/tooltip
+
+undefined
 
 rxjs
 Apache-2.0

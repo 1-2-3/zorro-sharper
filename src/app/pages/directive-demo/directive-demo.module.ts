@@ -5,10 +5,11 @@ import { ZorroSharperModule } from "../../../../projects/zorro-sharper/src/lib/z
 
 import { DirectiveDemoRoutingModule } from "./directive-demo-routing.module";
 import { AutoHeightCardDemoComponent } from "./auto-height/auto-height-card-demo.component";
+import { AutoHeightTableDemoComponent } from "./auto-height/auto-height-table-demo.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
-  imports: [DirectiveDemoRoutingModule, NgZorroAntdModule, ZorroSharperModule],
-  declarations: [AutoHeightCardDemoComponent],
-  exports: [AutoHeightCardDemoComponent]
+  imports: [CommonModule, DirectiveDemoRoutingModule, NgZorroAntdModule, ZorroSharperModule],
+  declarations: [AutoHeightCardDemoComponent, AutoHeightTableDemoComponent]
 })
 export class DirectiveDemoModule {}
