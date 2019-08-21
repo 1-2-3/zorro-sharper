@@ -6,7 +6,7 @@
     "start": "ng serve -o",
     "build": "ng build --prod",
     "build-lib": "ng build zorro-sharper",
-    "build-doc": "ng build zorro-sharper-doc --prod --base-href /zorro-sharper/ && dir && del /S /F /Q docs\\*.* && xcopy /s /e /i /y dist\\zorro-sharper-doc\\*.* docs\\",
+    "build-doc": "ng build zorro-sharper-doc --prod --base-href /zorro-sharper/ && dir && del /S /F /Q docs\\*.* && xcopy /s /e /i /y dist\\zorro-sharper-doc\\*.* docs\\ && copy docs\\index.html docs\\404.html",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
