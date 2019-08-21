@@ -1,0 +1,105 @@
+<h1>简化下拉框物理分页</h1>
+
+<div nz-row [nzGutter]="16" style="background-color: white;">
+  <div nz-col nzSpan="6">
+    <nz-select
+      *nsSelectAsyncDs="userDs; let ds"
+      style="width: 100%;"
+      [(ngModel)]="selectedUser"
+      (nzOnSearch)="ds.onSearch($event)"
+      (nzScrollToBottom)="ds.loadMore()"
+      nzPlaceHolder="请选择"
+      nzAllowClear
+    >
+      <nz-option
+        *ngFor="let o of ds.options"
+        [nzValue]="o.login.uuid"
+        [nzLabel]="o.name.title"
+      ></nz-option>
+      <nz-option *ngIf="ds.loading" nzDisabled nzCustomContent>
+        <i nz-icon nzType="loading" class="loading-icon"></i> 正在加载...
+      </nz-option>
+      <nz-option *ngIf="ds.allDataLoaded" nzDisabled nzCustomContent>
+        已全部加载
+      </nz-option>
+    </nz-select>
+  </div>
+  <div nz-col nzSpan="18">
+    <p>
+      当下拉框需要加载的数据量较大时，物理分页是减少等待时间、提升用户体验的好办法。zorro组件库的select组件也提供了完备的物理分页无限滚动异步加载数据的解决方案。可参考<a
+        target="_blank"
+        href="https://ng.ant.design/components/select/zh#components-select-demo-scroll-load"
+        >官方示例页面</a
+      >内“下拉加载：一个带有下拉加载远程数据的例子。”
+    </p>
+    <p>
+      但使用物理分页异步加载的方式要比进入页面一次性加载数据的方式麻烦很多。特别是编辑表单数据的情况，要考虑：
+    </p>
+    <ul>
+      <li>初始进入页面时下拉框要加载一页数据作为初始的下拉选项列表。</li>
+      <li>加载表单数据，如果表单数据中含有该下拉框绑定属性的值，该值做为下拉框初始选中的值。</li>
+      <li>
+        如果下拉框初始选中值在下拉选项中，该选项要高亮显示；如果不在初始的下拉选项列表中，要先增加选项，再将该选项高亮显示。
+      </li>
+      <li>
+        响应选项列表滚动到底部的事件，加载下一页数据。数据全部加载完毕时，显示“已全部加载”字样。
+      </li>
+      <li>
+        支持模糊检索。
+      </li>
+    </ul>
+    <p>
+      这样表单内每增加一个异步下拉框，就要增加几十行代码，若干公有属性，代码臃肿且容易出错。
+    </p>
+    <p>
+      我们首先将加载数据等操作封装到一个 SelectAsyncDs 对象中。
+    </p>
+    <pre>
+      <span style="color: #008000;">//</span><span style="color: #008000;"> 异步下拉框数据源</span>
+      userDs = <span style="color: #0000ff;">new</span> <strong>SelectAsyncDs</strong>((pageNum, pageSize, query) =&gt;
+        <span style="color: #0000ff;">this</span><span style="color: #000000;">.getUserList(pageNum, pageSize, query)
+      );</span>
+    </pre>
+    <p>
+      初始化表单数据和下拉选项列表数据。
+    </p>
+    <pre>
+      selectedUser = <span style="color: #0000ff;">null</span>; <span style="color: #008000;">//</span><span style="color: #008000;"> 当前选中项</span>
+      ngOnInit(): <span style="color: #0000ff;">void</span><span style="color: #000000;"> {{'{'}}
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 假设是编辑表单的情况，假设已从表单中加载了当前选中的 user 数据</span>
+        <span style="color: #0000ff;">this</span>.selectedUser =<span style="color: #000000;"> user.login.uuid;
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 将当前选中值加入下拉选项中</span>
+        <span style="color: #0000ff;">this</span>.userDs.reload().subscribe(() =&gt;<span style="color: #000000;"> {{'{'}}
+          </span><span style="color: #0000ff;">this</span>.userDs.appendOption(user, d =&gt;<span style="color: #000000;"> d.login.uuid);
+        {{'}'}});
+      {{'}'}}</span>
+    </pre>
+    <p>
+      在模板中，使用 nsSelectAsyncDs 结构型指令将 userDs 统一重命名为 ds。
+    </p>
+    <pre>
+      <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-select
+      </span><span style="color: #ff0000;">*nsSelectAsyncDs</span><span style="color: #0000ff;">="userDs; let <strong>ds</strong>"</span><span style="color: #ff0000;">
+      style</span><span style="color: #0000ff;">="width: 100%;"</span><span style="color: #ff0000;">
+      [(ngModel)]</span><span style="color: #0000ff;">="selectedUser"</span><span style="color: #ff0000;">
+      (nzOnSearch)</span><span style="color: #0000ff;">="ds.onSearch($event)"</span><span style="color: #ff0000;">
+      (nzScrollToBottom)</span><span style="color: #0000ff;">="ds.loadMore()"</span><span style="color: #ff0000;">
+      nzPlaceHolder</span><span style="color: #0000ff;">="请选择"</span><span style="color: #ff0000;">
+      nzAllowClear
+    </span><span style="color: #0000ff;">&gt;</span>
+      <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-option
+        </span><span style="color: #ff0000;">*ngFor</span><span style="color: #0000ff;">="let o of <strong>ds</strong>.options"</span><span style="color: #ff0000;">
+        [nzValue]</span><span style="color: #0000ff;">="o.login.uuid"</span><span style="color: #ff0000;">
+        [nzLabel]</span><span style="color: #0000ff;">="o.name.title"</span>
+      <span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">nz-option</span><span style="color: #0000ff;">&gt;</span>
+      <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-option </span><span style="color: #ff0000;">*ngIf</span><span style="color: #0000ff;">="<strong>ds</strong>.loading"</span><span style="color: #ff0000;"> nzDisabled nzCustomContent</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">i </span><span style="color: #ff0000;">nz-icon nzType</span><span style="color: #0000ff;">="loading"</span><span style="color: #ff0000;"> class</span><span style="color: #0000ff;">="loading-icon"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">i</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"> 正在加载...
+      </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-option</span><span style="color: #0000ff;">&gt;</span>
+      <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-option </span><span style="color: #ff0000;">*ngIf</span><span style="color: #0000ff;">="<strong>ds</strong>.allDataLoaded"</span><span style="color: #ff0000;"> nzDisabled nzCustomContent</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+        已全部加载
+      </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-option</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-select</span><span style="color: #0000ff;">&gt;</span>
+  </pre>
+    <p>完整例子可参考</p>
+  </div>
+</div>
