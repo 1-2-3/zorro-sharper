@@ -1,0 +1,137 @@
+<h1>下拉框自动赋值</h1>
+<div nz-row [nzGutter]="16" style="background-color: white;">
+  <div nz-col nzSpan="6" style="border:1px solid #1890FF;padding-top: 16px;">
+    <form nz-form [formGroup]="formGroup" (ngSubmit)="submit()" nzType="horizontal">
+      <div nz-row>
+        <div nz-col nzSpan="24">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6">用户</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-select
+                formControlName="userId"
+                nsSelectTextField="userText"
+                *nsSelectAsyncDs="userDs; let ds"
+                style="width: 100%;"
+                (nzOnSearch)="ds.onSearch($event)"
+                (nzScrollToBottom)="ds.loadMore()"
+                nzPlaceHolder="请选择"
+                [nzNotFoundContent]="'暂无数据'"
+                nzAllowClear
+              >
+                <nz-option
+                  *ngFor="let o of ds.options"
+                  [nzValue]="o.login.uuid"
+                  [nzLabel]="o.name.title"
+                ></nz-option>
+                <nz-option *ngIf="ds.loading" nzDisabled nzCustomContent>
+                  <i nz-icon nzType="loading" class="loading-icon"></i> 正在加载...
+                </nz-option>
+                <nz-option *ngIf="ds.allDataLoaded" nzDisabled nzCustomContent>
+                  已全部加载
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="24">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6">性别</nz-form-label>
+            <nz-form-control nzSpan="16">
+              <nz-select
+                formControlName="sexId"
+                nsSelectTextField="sexText"
+                [nzPlaceHolder]="'请选择'"
+                [nzNotFoundContent]="'暂无数据'"
+              >
+                <nz-option
+                  *ngFor="let option of sexOptions"
+                  [nzLabel]="option.text"
+                  [nzValue]="option.id"
+                ></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="24" style="text-align: right;padding-right: 26px;">
+          <button nz-button [nzType]="'primary'">保存</button>
+        </div>
+        <div nz-col nzSpan="24">
+          <p><br />提交的表单数据：</p>
+          <pre>
+              <code>
+{{ submitJson }}
+              </code>
+          </pre>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div nz-col nzSpan="18">
+    <p>
+      在业务表中冗余保存关联数据的文本是一个常见的设计。例如将用户ID保存在 userId
+      字段中，同时将用户姓名保存在 userText 字段中。
+    </p>
+    <p>
+      常规的实现方式是，在前端表单，用户下拉框绑定 userId 属性，提交表单时只将 userId
+      提交给后端，后端再通过 userId 从数据库中查询得到
+      userText。此种做法的缺点是后端需要多耗费一次数据库查询，也使后端代码更加臃肿。
+    </p>
+    <p>
+      能否在前端提交表单时就同时带有 userId 和 userText 内容呢？我们提供 nsSelectTextField
+      指令来实现此功能。首先，在定义表单时增加 userText 属性：
+    </p>
+    <pre>
+<span style="color: #000000;">ngOnInit() {{'{'}}
+    </span><span style="color: #0000ff;">this</span>.formGroup = <span style="color: #0000ff;">this</span><span style="color: #000000;">.formBuilder.group({{'{'}}
+      id: [</span>""<span style="color: #000000;">, []],
+      userId: [</span>""<span style="color: #000000;">, []],
+      <b>userText: </b>[</span>""<span style="color: #000000;">, []],
+      sexId: [</span>""<span style="color: #000000;">, []],
+      sexText: [</span>""<span style="color: #000000;">, []]
+  {{'}'}});
+{{'}'}}</span></pre>
+    <p>
+      在 nz-select 组件上添加 nsSelectTextField 指令并指定文本字段名：
+    </p>
+    <pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-select
+      </span><span style="color: #ff0000;">formControlName</span><span style="color: #0000ff;">="userId"</span><span style="color: #0000ff;">
+      <b>nsSelectTextField</b></span><span style="color: #0000ff;">="userText"</span><span style="color: #ff0000;">
+      *nsSelectAsyncDs</span><span style="color: #0000ff;">="userDs; let ds"</span><span style="color: #ff0000;">
+      style</span><span style="color: #0000ff;">="width: 100%;"</span><span style="color: #ff0000;">
+      (nzOnSearch)</span><span style="color: #0000ff;">="ds.onSearch($event)"</span><span style="color: #ff0000;">
+      (nzScrollToBottom)</span><span style="color: #0000ff;">="ds.loadMore()"</span><span style="color: #ff0000;">
+      nzPlaceHolder</span><span style="color: #0000ff;">="请选择"</span><span style="color: #ff0000;">
+      [nzNotFoundContent]</span><span style="color: #0000ff;">="'暂无数据'"</span><span style="color: #ff0000;">
+      nzAllowClear
+    </span><span style="color: #0000ff;">&gt;</span>
+      <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-option
+        </span><span style="color: #ff0000;">*ngFor</span><span style="color: #0000ff;">="let o of ds.options"</span><span style="color: #ff0000;">
+        [nzValue]</span><span style="color: #0000ff;">="o.login.uuid"</span><span style="color: #ff0000;">
+        [nzLabel]</span><span style="color: #0000ff;">="o.name.title"</span>
+      <span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">nz-option</span><span style="color: #0000ff;">&gt;</span>
+      <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-option </span><span style="color: #ff0000;">*ngIf</span><span style="color: #0000ff;">="ds.loading"</span><span style="color: #ff0000;"> nzDisabled nzCustomContent</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">i </span><span style="color: #ff0000;">nz-icon nzType</span><span style="color: #0000ff;">="loading"</span><span style="color: #ff0000;"> class</span><span style="color: #0000ff;">="loading-icon"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">i</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"> 正在加载...
+      </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-option</span><span style="color: #0000ff;">&gt;</span>
+      <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-option </span><span style="color: #ff0000;">*ngIf</span><span style="color: #0000ff;">="ds.allDataLoaded"</span><span style="color: #ff0000;"> nzDisabled nzCustomContent</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+        已全部加载
+      </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-option</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-select</span><span style="color: #0000ff;">&gt;</span></pre>
+    <p>
+      这样在从下拉框中选择了数据项之后，用户姓名将自动赋值到 userText
+      属性中，提交表单时一并提交给后端。可在本示例下拉框中更换用户或性别下拉框的选择项，然后点击“提交”按钮，查看提交的JSON数据。
+    </p>
+    <p>
+      完整例子可参考完整示例：<a
+        target="_blank"
+        href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/pages/directive-demo/select/select-text-field.component.ts"
+        >select-text-field.component.ts</a
+      >
+      和
+      <a
+        target="_blank"
+        href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/pages/directive-demo/select/select-text-field.component.html"
+        >select-text-field.component.html</a
+      >
+    </p>
+  </div>
+</div>

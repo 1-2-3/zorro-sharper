@@ -9,6 +9,7 @@ import { AutoHeightCardDemoComponent } from "./auto-height/auto-height-card-demo
 import { AutoHeightTableDemoComponent } from "./auto-height/auto-height-table-demo.component";
 import { CommonModule } from "@angular/common";
 import { SelectAsyncDsComponent } from "./select/select-async-ds.component";
+import { SelectTextFieldComponent } from "./select/select-text-field.component";
 
 @NgModule({
   imports: [
@@ -19,6 +20,11 @@ import { SelectAsyncDsComponent } from "./select/select-async-ds.component";
     NgZorroAntdModule,
     ZorroSharperModule
   ],
-  declarations: [AutoHeightCardDemoComponent, AutoHeightTableDemoComponent, SelectAsyncDsComponent]
+  declarations: [
+    AutoHeightCardDemoComponent,
+    AutoHeightTableDemoComponent,
+    SelectAsyncDsComponent,
+    SelectTextFieldComponent
+  ]
 })
 export class DirectiveDemoModule {}

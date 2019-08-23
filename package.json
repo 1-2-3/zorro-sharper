@@ -1,6 +1,20 @@
 {
   "name": "zorro-sharper-doc",
-  "version": "0.0.0",
+  "version": "0.0.8",
+  "description": "针对 ng-zorro-antd 组件库的轻量级增强指令、组件集。",
+  "keywords": [
+    "angular",
+    "angular2",
+    "ng2",
+    "zorro-sharper",
+    "ng-zorro-antd"
+  ],
+  "author": "1-2-3 <1-2-3>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/1-2-3/zorro-sharper/issues"
+  },
+  "homepage": "https://github.com/1-2-3/zorro-sharper",
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",

@@ -143,6 +143,8 @@ ng-zorro-antd/dropdown
 
 ng-zorro-antd/empty
 
+ng-zorro-antd/form
+
 ng-zorro-antd/input
 
 ng-zorro-antd/layout
