@@ -1,6 +1,6 @@
 # ZORRO Sharper
 
-> 针对 ng-zorro-antd 组件库的轻量级增强指令、组件集。
+> 针对 ng-zorro-antd 组件库的轻量级增强指令集。
 
 [![](https://img.shields.io/npm/v/zorro-sharper)](https://www.npmjs.com/package/zorro-sharper)
 
