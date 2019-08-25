@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { SelectAsyncDs } from "projects/zorro-sharper/src/public-api";
+// import { SelectAsyncDs } from "projects/zorro-sharper/src/public-api";
+import { SelectAsyncDs } from "zorro-sharper";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { zip } from "rxjs";

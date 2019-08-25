@@ -1,6 +1,6 @@
 {
   "name": "zorro-sharper-doc",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "针对 ng-zorro-antd 组件库的轻量级增强指令、组件集。",
   "keywords": [
     "angular",
@@ -39,7 +39,7 @@
     "rxjs": "^6.5.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1",
-    "zorro-sharper": "^0.0.4"
+    "zorro-sharper": "^1.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.802.1",

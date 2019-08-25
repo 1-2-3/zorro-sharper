@@ -4,18 +4,23 @@ import { NsAutoHeightDivDirective } from "./directives/ns-auto-height-div.direct
 import { NsAutoHeightTableDirective } from "./directives/ns-auto-height-table.directive";
 import { NsSelectAsyncDsDirective } from "./directives/ns-select-async-ds.directive";
 import { NsSelectTextFieldDirective } from "./directives/ns-select-text-field.directive";
+import { NsFormErrorTipsComponent } from "./components/ns-form-error-tips.component";
+import { NsErrorTipDirective } from "./directives/ns-error-tip.directive";
+import { CommonModule } from "@angular/common";
 
 const DIRECTIVES = [
   NsAutoHeightCardDirective,
   NsAutoHeightDivDirective,
   NsAutoHeightTableDirective,
   NsSelectAsyncDsDirective,
-  NsSelectTextFieldDirective
+  NsSelectTextFieldDirective,
+  NsErrorTipDirective
 ];
 
 @NgModule({
-  declarations: [...DIRECTIVES],
-  imports: [],
-  exports: [...DIRECTIVES]
+  declarations: [...DIRECTIVES, NsFormErrorTipsComponent],
+  imports: [CommonModule],
+  exports: [...DIRECTIVES],
+  entryComponents: [NsFormErrorTipsComponent]
 })
 export class ZorroSharperModule {}
