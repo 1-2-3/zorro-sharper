@@ -44,3 +44,7 @@ export class DirectiveDemoModule {}
   <p>只需添加 “nsAutoHeightCard” 指令即可让 nz-card 底部延展到页面底部.</p>
 </nz-card>
 ```
+
+## License
+
+MIT
