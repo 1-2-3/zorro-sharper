@@ -5,9 +5,11 @@ import { AutoHeightTableDemoComponent } from "./auto-height/auto-height-table-de
 import { SelectAsyncDsComponent } from "./select/select-async-ds.component";
 import { SelectTextFieldComponent } from "./select/select-text-field.component";
 import { FormErrorTipComponent } from "./form/form-error-tip.component";
+import { AutoHeightTabsetDemoComponent } from "./auto-height/auto-height-tabset-demo.component";
 
 const routes: Routes = [
   { path: "auto-height-card-demo", component: AutoHeightCardDemoComponent },
+  { path: "auto-height-tabset-demo", component: AutoHeightTabsetDemoComponent },
   { path: "auto-height-table-demo", component: AutoHeightTableDemoComponent },
   { path: "select-async-ds", component: SelectAsyncDsComponent },
   { path: "select-text-field", component: SelectTextFieldComponent },

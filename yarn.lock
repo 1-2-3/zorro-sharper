@@ -7833,9 +7833,9 @@ zone.js@~0.9.1:
   resolved "https://registry.npm.taobao.org/zone.js/download/zone.js-0.9.1.tgz#e37c6e5c54c13fae4de26b5ffe8d8e9212da6d9b"
   integrity sha1-43xuXFTBP65N4mtf/o2OkhLabZs=
 
-zorro-sharper@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/zorro-sharper/-/zorro-sharper-1.0.0.tgz#edf8bf924ab382174e4cdf33aa92358a8f0519b5"
-  integrity sha512-V++VGRHFWKvq9iXk/6Pf0SWxRJBUUacsG23FEsZugEHWl4OipcrFFu9e89mIcby970O8QkXig4W8namuj6MiSA==
+zorro-sharper@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/zorro-sharper/-/zorro-sharper-1.1.0.tgz#03574ce2773ef16a485e9e9d9d4f8e166861fe7e"
+  integrity sha512-8JmiTqhP36ou2J2OcvkanEQ8iT5uIrfgT3wwePp7oWkgg6CstMSC9Pci6bT/9rIbZK3wjvALZ0o/XAwOMg3h9Q==
   dependencies:
     tslib "^1.9.0"
