@@ -3,13 +3,10 @@
   将 nsAutoHeightTable 指令应用于 nz-table 组件，可令其根据父容器高度自动调整表格高度。也可使用
   nsAutoHeightTable="100" 这样的方式自定义表格底部到容器底部的距离。示例：
 </p>
-<pre>
-  <code>
-&lt;nz-card nsAutoHeightCard nzTitle=&quot;用户地址&quot;&gt;
+<pre><code>&lt;nz-card nsAutoHeightCard nzTitle=&quot;用户地址&quot;&gt;
   &lt;nz-table <b>nsAutoHeightTable</b> ...&gt;...&lt;/nz-table&gt;
-&lt;/nz-card&gt;
-  </code>
-</pre>
+&lt;/nz-card&gt;</code></pre>
+<p><b>* 注：如果是使用 ng-alain 的 st 表格组件，请使用 nsAutoHeightST 指令</b></p>
 <nz-card nsAutoHeightCard nzTitle="用户地址">
   <nz-table
     nsAutoHeightTable
@@ -46,4 +43,12 @@
       </tr>
     </tbody>
   </nz-table>
+  <!-- <st
+    nsAutoHeightST
+    #st
+    [data]="users"
+    [columns]="columns"
+    [page]="{ position: 'bottom' }"
+    size="small"
+  ></st> -->
 </nz-card>

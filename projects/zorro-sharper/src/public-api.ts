@@ -12,3 +12,4 @@ export * from "./lib/directives/select-async-ds";
 export * from "./lib/directives/ns-select-text-field.directive";
 export * from "./lib/directives/ns-error-tip.directive";
 export * from "./lib/service/ns-form-error-type";
+export * from "./lib/directives/ns-auto-height-st.directive";

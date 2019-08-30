@@ -7,6 +7,7 @@ import { NsSelectTextFieldDirective } from "./directives/ns-select-text-field.di
 import { NsFormErrorTipsComponent } from "./components/ns-form-error-tips.component";
 import { NsErrorTipDirective } from "./directives/ns-error-tip.directive";
 import { CommonModule } from "@angular/common";
+import { NsAutoHeightSTDirective } from "./directives/ns-auto-height-st.directive";
 
 const DIRECTIVES = [
   NsAutoHeightCardDirective,
@@ -14,7 +15,8 @@ const DIRECTIVES = [
   NsAutoHeightTableDirective,
   NsSelectAsyncDsDirective,
   NsSelectTextFieldDirective,
-  NsErrorTipDirective
+  NsErrorTipDirective,
+  NsAutoHeightSTDirective
 ];
 
 @NgModule({
