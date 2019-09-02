@@ -3,7 +3,7 @@
 > Light-weight directives that power up ng-zorro-antd.
 
 [![](https://img.shields.io/npm/v/zorro-sharper)](https://www.npmjs.com/package/zorro-sharper)
-[![GitHub](https://img.shields.io/github/license/1-2-3/zorro-sharper)](https://github.com/1-2-3/zorro-sharper# License)
+[![GitHub](https://img.shields.io/github/license/1-2-3/zorro-sharper)](https://github.com/1-2-3/zorro-sharper#License)
 
 Enhance and simplify [NG-ZORRO](https://github.com/NG-ZORRO/ng-zorro-antd) in a lightweight way.
 
