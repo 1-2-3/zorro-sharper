@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Data } from "@angular/router";
-// import { STColumn, STColumnButton, STColumnBadge, STColumnTag } from "@delon/abc";
+import { STColumn, STColumnButton, STColumnBadge, STColumnTag } from "@delon/abc";
 
 // const BADGE: STColumnBadge = {
 //   1: { text: "成功", color: "success" },
@@ -102,7 +102,7 @@ export class AutoHeightTableDemoComponent implements OnInit {
   // ];
 
   // reload() {
-  //   this.users = Array(10)
+  //   this.users = Array(60)
   //     .fill({})
   //     .map((_item: any, idx: number) => {
   //       return {

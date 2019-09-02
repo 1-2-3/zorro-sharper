@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
-// import { SelectAsyncDs } from "projects/zorro-sharper/src/public-api";
-import { SelectAsyncDs } from "zorro-sharper";
+import { SelectAsyncDs } from "projects/zorro-sharper/src/public-api";
+// import { SelectAsyncDs } from "zorro-sharper";
 
 @Component({
   selector: "app-select-async-ds.component",

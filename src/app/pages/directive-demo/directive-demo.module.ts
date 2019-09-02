@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NgZorroAntdModule } from "ng-zorro-antd";
 import { DelonABCModule } from "@delon/abc";
-import { ZorroSharperModule } from "zorro-sharper";
-// import { ZorroSharperModule } from "../../../../projects/zorro-sharper/src/lib/zorro-sharper.module";
+// import { ZorroSharperModule } from "zorro-sharper";
+import { ZorroSharperModule } from "../../../../projects/zorro-sharper/src/lib/zorro-sharper.module";
 
 import { DirectiveDemoRoutingModule } from "./directive-demo-routing.module";
 import { AutoHeightCardDemoComponent } from "./auto-height/auto-height-card-demo.component";

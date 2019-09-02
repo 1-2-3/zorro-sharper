@@ -21,6 +21,16 @@ export class NsAutoHeightTableDirective {
     private container: ViewContainerRef,
     private renderer: Renderer
   ) {
+    // 当前页码改变时自动回到顶部
+    if (this.table && this.table.nzPageIndexChange) {
+      this.table.nzPageIndexChange.subscribe(index => {
+        let tableBody = this.element.nativeElement.querySelector(".ant-table-body");
+        if (tableBody && tableBody.scrollTop) {
+          tableBody.scrollTop = 0;
+        }
+      });
+    }
+
     setTimeout(() => {
       let offset = this.offset || 70;
       if (
