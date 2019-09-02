@@ -7,7 +7,7 @@
 
 使用超级轻量化的方式来增强、简化 [ZORRO 组件库](https://github.com/NG-ZORRO/ng-zorro-antd)。
 
-[English](README-en_US.md) | 简体中文
+简体中文 | [English](README-en_US.md)
 
 ## 特性
 
