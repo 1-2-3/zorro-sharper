@@ -7,6 +7,8 @@
 
 使用超级轻量化的方式来增强、简化 [ZORRO 组件库](https://github.com/NG-ZORRO/ng-zorro-antd)。
 
+[English](README-en_US.md) | 简体中文
+
 ## 特性
 
 - 自适应高度的卡片和 DIV
@@ -41,7 +43,7 @@ export class DirectiveDemoModule {}
 
 在需要的地方使用指令或组件。
 
-```ts
+```html
 <nz-card nsAutoHeightCard nzHoverable nzTitle="自适应高度卡片">
   <p>只需添加 “nsAutoHeightCard” 指令即可让 nz-card 底部延展到页面底部.</p>
 </nz-card>
