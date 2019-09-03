@@ -4,6 +4,7 @@
 
 [![](https://img.shields.io/npm/v/zorro-sharper)](https://www.npmjs.com/package/zorro-sharper)
 [![GitHub](https://img.shields.io/github/license/1-2-3/zorro-sharper)](https://github.com/1-2-3/zorro-sharper#license)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/zorro-sharper)](https://img.shields.io/bundlephobia/min/zorro-sharper)
 
 使用超级轻量化的方式来增强、简化 [ZORRO 组件库](https://github.com/NG-ZORRO/ng-zorro-antd)。
 
