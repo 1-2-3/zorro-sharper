@@ -19,7 +19,7 @@
 - 下拉框自动赋值
 - 简化表单验证
 
-![](src/assets/auto-height-card.gif)
+<img src="src/assets/auto-height-card.gif" width = '500px'/>
 
 ## 安装
 
