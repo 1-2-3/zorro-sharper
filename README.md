@@ -19,6 +19,8 @@
 - 下拉框自动赋值
 - 简化表单验证
 
+![](src/assets/auto-height-card.gif)
+
 ## 安装
 
 ```sh

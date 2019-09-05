@@ -19,6 +19,8 @@ English | [简体中文](README.md)
 - Drop-down box auto assignment
 - Simplify form validation
 
+![](src/assets/auto-height-card.gif)
+
 ## Installation
 
 ```sh
