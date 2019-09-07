@@ -1,13 +1,4 @@
-import {
-  Directive,
-  TemplateRef,
-  EmbeddedViewRef,
-  ViewContainerRef,
-  Optional,
-  ChangeDetectorRef
-} from "@angular/core";
-import { NzFormItemComponent, NzFormLabelComponent, NzFormControlComponent } from "ng-zorro-antd";
-import { FormControl } from "@angular/forms";
+import { Directive, TemplateRef, EmbeddedViewRef, ViewContainerRef } from "@angular/core";
 
 /**
  * 简化表单验证反馈
@@ -20,13 +11,7 @@ export class NsAutoFeedbackDirective {
   private _templateRef: TemplateRef<Context> | null = null;
   private _viewRef: EmbeddedViewRef<Context> | null = null;
 
-  constructor(
-    private _viewContainer: ViewContainerRef,
-    private templateRef: TemplateRef<Context>,
-    private cdr: ChangeDetectorRef,
-    @Optional() private label: NzFormLabelComponent,
-    @Optional() private ctrl: NzFormControlComponent
-  ) {
+  constructor(private _viewContainer: ViewContainerRef, private templateRef: TemplateRef<Context>) {
     this._templateRef = templateRef;
   }
 
@@ -51,6 +36,7 @@ export class NsAutoFeedbackDirective {
             control.instance.nzHasFeedback = true;
           }
         }
+
         if (
           control.instance.validateControl &&
           control.instance.validateControl.errors &&
@@ -85,10 +71,12 @@ export class NsAutoFeedbackDirective {
       this._labelCmp = this._viewRef["_view"].nodes.find(
         n =>
           n.instance &&
-          n.instance.constructor &&
-          n.instance.constructor.name == "NzFormLabelComponent"
+          n.instance.elementRef &&
+          n.instance.elementRef.nativeElement &&
+          n.instance.elementRef.nativeElement.localName == "nz-form-label"
+        //n.instance.constructor &&
+        //n.instance.constructor.name == "NzFormLabelComponent"
       );
-      console.log("do find label");
     }
 
     return this._labelCmp;
@@ -100,8 +88,11 @@ export class NsAutoFeedbackDirective {
       this._formControlCmp = this._viewRef["_view"].nodes.find(
         n =>
           n.instance &&
-          n.instance.constructor &&
-          n.instance.constructor.name == "NzFormControlComponent"
+          n.instance.elementRef &&
+          n.instance.elementRef.nativeElement &&
+          n.instance.elementRef.nativeElement.localName == "nz-form-control"
+        // n.instance.constructor &&
+        // n.instance.constructor.name == "NzFormControlComponent"
       );
     }
 
@@ -113,7 +104,11 @@ export class NsAutoFeedbackDirective {
     if (!this._formControlNameDirective) {
       this._formControlNameDirective = this._viewRef["_view"].nodes.find(
         n =>
-          n.instance && n.instance.constructor && n.instance.constructor.name == "FormControlName"
+          n.instance &&
+          n.instance.control &&
+          n.instance.control.hasOwnProperty("asyncValidator") &&
+          n.instance.control.hasOwnProperty("errors")
+        // n.instance.constructor && n.instance.constructor.name == "FormControlName"
       );
     }
 
