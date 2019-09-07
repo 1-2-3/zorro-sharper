@@ -9,6 +9,7 @@ import { NsErrorTipDirective } from "./directives/ns-error-tip.directive";
 import { CommonModule } from "@angular/common";
 import { NsAutoHeightSTDirective } from "./directives/ns-auto-height-st.directive";
 import { NsAutoHeightTabsetDirective } from "./directives/ns-auto-height-tabset.directive";
+import { NsAutoFeedbackDirective } from "./directives/ns-auto-feedback.directive";
 
 const DIRECTIVES = [
   NsAutoHeightCardDirective,
@@ -18,7 +19,8 @@ const DIRECTIVES = [
   NsSelectTextFieldDirective,
   NsErrorTipDirective,
   NsAutoHeightSTDirective,
-  NsAutoHeightTabsetDirective
+  NsAutoHeightTabsetDirective,
+  NsAutoFeedbackDirective
 ];
 
 @NgModule({

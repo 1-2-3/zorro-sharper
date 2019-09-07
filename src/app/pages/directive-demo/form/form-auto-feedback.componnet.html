@@ -1,0 +1,108 @@
+<h1>简化表单验证反馈</h1>
+<div nz-row [nzGutter]="32" style="background-color: white;">
+  <div nz-col nzSpan="6" style="border:1px solid #1890FF;padding-top: 16px;">
+    <form nz-form [formGroup]="formGroup" (ngSubmit)="submit()" nzType="horizontal">
+      <div nz-row>
+        <div nz-col nzSpan="24">
+          <nz-form-item *nsAutoFeedback>
+            <nz-form-label [nzSpan]="8">用户名</nz-form-label>
+            <nz-form-control nsErrorTip nzSpan="16">
+              <input nz-input formControlName="userText" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="24">
+          <nz-form-item *nsAutoFeedback>
+            <nz-form-label [nzSpan]="8">用户编码</nz-form-label>
+            <nz-form-control nsErrorTip nzSpan="16">
+              <input nz-input formControlName="userCode" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="24">
+          <nz-form-item *nsAutoFeedback>
+            <nz-form-label [nzSpan]="8">年龄</nz-form-label>
+            <nz-form-control nsErrorTip nzSpan="16">
+              <input nz-input formControlName="age" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="24" style="text-align: right;margin-bottom:16px;">
+          <button nz-button [nzType]="'primary'">保存</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div nz-col nzSpan="18">
+    <p>在表单验证视觉反馈这一块有下列比较<b>麻烦</b>的事情需要我们<b>手工</b>来做：</p>
+    <ul>
+      <li>
+        如果是必填项，需要为 nz-form-label 增加 <b>nzRequired</b> 属性以便在 label 前面显示红色的
+        “*” 表示是必填项
+      </li>
+      <li>
+        如果组件指定了必填等验证条件，需要为 nz-form-control 组件增加 <b>nzHasFeedback</b>
+        属性，以便在执行表单验证后显示验证通过或未通过时的图标
+      </li>
+      <li>
+        如果组件未指定任何验证条件，不要给 nz-form-control 组件增加
+        <b>nzHasFeedback</b>，否则执行表单验证后该组件显示了绿色的对号图标也很奇怪。
+      </li>
+      <li>
+        另外，如果为 nz-form-label 组件增加 nzFor 属性，匹配 input 等可编辑组件的 id
+        属性，可以实现用户鼠标点击 label 上的文字可编辑组件获得焦点的效果，可以提升用户体验。
+      </li>
+    </ul>
+    <p>
+      只要为 nz-form-item 组件统一增加
+      <b>*nsAutoFeedback</b> 结构型指令，就可以一次将上述工作自动完成。
+    </p>
+    <p>
+      示例：
+    </p>
+    <pre>
+      <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">form </span><span style="color: #ff0000;">nz-form [formGroup]</span><span style="color: #0000ff;">="formGroup"</span><span style="color: #ff0000;"> (ngSubmit)</span><span style="color: #0000ff;">="submit()"</span><span style="color: #ff0000;"> nzType</span><span style="color: #0000ff;">="horizontal"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">nz-row</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">nz-col nzSpan</span><span style="color: #0000ff;">="24"</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-form-item </span><span style="color: #0000ff;"><b>*nsAutoFeedback</b></span><span style="color: #0000ff;">&gt;</span>
+              <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-form-label </span><span style="color: #ff0000;">[nzSpan]</span><span style="color: #0000ff;">="8"</span><span style="color: #0000ff;">&gt;</span>用户名<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-form-label</span><span style="color: #0000ff;">&gt;</span>
+              <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-form-control </span><span style="color: #ff0000;">nsErrorTip nzSpan</span><span style="color: #0000ff;">="16"</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">nz-input formControlName</span><span style="color: #0000ff;">="userText"</span> <span style="color: #0000ff;">/&gt;</span>
+              <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-form-control</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-form-item</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">nz-col nzSpan</span><span style="color: #0000ff;">="24"</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-form-item </span><span style="color: #0000ff;"><b>*nsAutoFeedback</b></span><span style="color: #0000ff;">&gt;</span>
+              <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-form-label </span><span style="color: #ff0000;">[nzSpan]</span><span style="color: #0000ff;">="8"</span><span style="color: #0000ff;">&gt;</span>用户编码<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-form-label</span><span style="color: #0000ff;">&gt;</span>
+              <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-form-control </span><span style="color: #ff0000;">nsErrorTip nzSpan</span><span style="color: #0000ff;">="16"</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">nz-input formControlName</span><span style="color: #0000ff;">="userCode"</span> <span style="color: #0000ff;">/&gt;</span>
+              <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-form-control</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-form-item</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">nz-col nzSpan</span><span style="color: #0000ff;">="24"</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-form-item </span><span style="color: #0000ff;"><b>*nsAutoFeedback</b></span><span style="color: #0000ff;">&gt;</span>
+              <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-form-label </span><span style="color: #ff0000;">[nzSpan]</span><span style="color: #0000ff;">="8"</span><span style="color: #0000ff;">&gt;</span>年龄<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-form-label</span><span style="color: #0000ff;">&gt;</span>
+              <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">nz-form-control </span><span style="color: #ff0000;">nsErrorTip nzSpan</span><span style="color: #0000ff;">="16"</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">nz-input formControlName</span><span style="color: #0000ff;">="age"</span> <span style="color: #0000ff;">/&gt;</span>
+              <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-form-control</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">nz-form-item</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">div </span><span style="color: #ff0000;">nz-col nzSpan</span><span style="color: #0000ff;">="24"</span><span style="color: #ff0000;"> style</span><span style="color: #0000ff;">="text-align: right;"</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">button </span><span style="color: #ff0000;">nz-button [nzType]</span><span style="color: #0000ff;">="'primary'"</span><span style="color: #0000ff;">&gt;</span>保存<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">button</span><span style="color: #0000ff;">&gt;</span>
+          <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
+      <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">form</span><span style="color: #0000ff;">&gt;</span></pre>
+    <p>
+      完整例子请参考：<a
+        target="_blank"
+        href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/pages/directive-demo/form/form-auto-feedback.componnet.html"
+        >form-error-tip.component.html</a
+      >&nbsp;
+      <a
+        target="_blank"
+        href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/pages/directive-demo/form/form-auto-feedback.componnet.ts"
+        >form-error-tip.component.ts</a
+      >
+    </p>
+  </div>
+</div>

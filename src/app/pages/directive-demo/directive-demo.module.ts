@@ -13,6 +13,7 @@ import { SelectAsyncDsComponent } from "./select/select-async-ds.component";
 import { SelectTextFieldComponent } from "./select/select-text-field.component";
 import { FormErrorTipComponent } from "./form/form-error-tip.component";
 import { AutoHeightTabsetDemoComponent } from "./auto-height/auto-height-tabset-demo.component";
+import { FormAutoFeedBackComponent } from "./form/form-auto-feedback.componnet";
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { AutoHeightTabsetDemoComponent } from "./auto-height/auto-height-tabset-
     SelectAsyncDsComponent,
     SelectTextFieldComponent,
     FormErrorTipComponent,
-    AutoHeightTabsetDemoComponent
+    AutoHeightTabsetDemoComponent,
+    FormAutoFeedBackComponent
   ]
 })
 export class DirectiveDemoModule {}

@@ -17,7 +17,8 @@
 - 自适应高度的表格
 - 简化下拉框物理分页
 - 下拉框自动赋值
-- 简化表单验证
+- 简化表单验证信息
+- 简化表单验证反馈
 
 <img src="src/assets/auto-height-card.gif" width = '500px'/>
 

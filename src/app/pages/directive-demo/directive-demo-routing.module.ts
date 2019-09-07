@@ -6,6 +6,7 @@ import { SelectAsyncDsComponent } from "./select/select-async-ds.component";
 import { SelectTextFieldComponent } from "./select/select-text-field.component";
 import { FormErrorTipComponent } from "./form/form-error-tip.component";
 import { AutoHeightTabsetDemoComponent } from "./auto-height/auto-height-tabset-demo.component";
+import { FormAutoFeedBackComponent } from "./form/form-auto-feedback.componnet";
 
 const routes: Routes = [
   { path: "auto-height-card-demo", component: AutoHeightCardDemoComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: "auto-height-table-demo", component: AutoHeightTableDemoComponent },
   { path: "select-async-ds", component: SelectAsyncDsComponent },
   { path: "select-text-field", component: SelectTextFieldComponent },
-  { path: "form-error-tip", component: FormErrorTipComponent }
+  { path: "form-error-tip", component: FormErrorTipComponent },
+  { path: "form-auto-feedback", component: FormAutoFeedBackComponent }
 ];
 
 @NgModule({

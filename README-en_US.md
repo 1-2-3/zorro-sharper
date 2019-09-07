@@ -17,7 +17,8 @@ English | [简体中文](README.md)
 - Adaptive height table
 - Simplified drop-down box physical pagination
 - Drop-down box auto assignment
-- Simplify form validation
+- Simplify form validation info
+- - Simplify form validation feedback
 
 <img src="src/assets/auto-height-card.gif" width = '500px'/>
 
