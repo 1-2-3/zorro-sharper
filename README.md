@@ -1,6 +1,6 @@
 # ZORRO Sharper
 
-> 让 zorro 组件库变得更简单、更易用、更强大的指令集
+> 让 zorro 组件库更简单、更易用、更强大的指令集
 
 [![](https://img.shields.io/npm/v/zorro-sharper)](https://www.npmjs.com/package/zorro-sharper)
 [![GitHub](https://img.shields.io/github/license/1-2-3/zorro-sharper)](https://github.com/1-2-3/zorro-sharper#license)
