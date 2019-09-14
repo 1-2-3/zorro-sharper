@@ -6,7 +6,7 @@
 [![GitHub](https://img.shields.io/github/license/1-2-3/zorro-sharper)](https://github.com/1-2-3/zorro-sharper#license)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/zorro-sharper)](https://img.shields.io/bundlephobia/min/zorro-sharper)
 
-使用超级轻量化的方式来增强、简化 [ZORRO 组件库](https://github.com/NG-ZORRO/ng-zorro-antd)。
+使用超级轻量化的方式来增强、简化 [ZORRO 组件库](https://github.com/NG-ZORRO/ng-zorro-antd)。设计理念：[不再“封装”组件](https://segmentfault.com/a/1190000020337985)
 
 简体中文 | [English](README-en_US.md)
 
