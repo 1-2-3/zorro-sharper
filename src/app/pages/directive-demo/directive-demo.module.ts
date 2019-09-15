@@ -14,6 +14,7 @@ import { SelectTextFieldComponent } from "./select/select-text-field.component";
 import { FormErrorTipComponent } from "./form/form-error-tip.component";
 import { AutoHeightTabsetDemoComponent } from "./auto-height/auto-height-tabset-demo.component";
 import { FormAutoFeedBackComponent } from "./form/form-auto-feedback.componnet";
+import { FlipCardDemoComponnet } from "./flip/flip-card-demo.componnet";
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { FormAutoFeedBackComponent } from "./form/form-auto-feedback.componnet";
     SelectTextFieldComponent,
     FormErrorTipComponent,
     AutoHeightTabsetDemoComponent,
-    FormAutoFeedBackComponent
+    FormAutoFeedBackComponent,
+    FlipCardDemoComponnet
   ]
 })
 export class DirectiveDemoModule {}

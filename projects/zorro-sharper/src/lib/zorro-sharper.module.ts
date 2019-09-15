@@ -10,6 +10,8 @@ import { CommonModule } from "@angular/common";
 import { NsAutoHeightSTDirective } from "./directives/ns-auto-height-st.directive";
 import { NsAutoHeightTabsetDirective } from "./directives/ns-auto-height-tabset.directive";
 import { NsAutoFeedbackDirective } from "./directives/ns-auto-feedback.directive";
+import { NsFlipDirective } from "./directives/ns-flip.directive";
+import { NsFlipTriggerDirective } from "./directives/ns-flip-trigger.directive";
 
 const DIRECTIVES = [
   NsAutoHeightCardDirective,
@@ -20,7 +22,9 @@ const DIRECTIVES = [
   NsErrorTipDirective,
   NsAutoHeightSTDirective,
   NsAutoHeightTabsetDirective,
-  NsAutoFeedbackDirective
+  NsAutoFeedbackDirective,
+  NsFlipDirective,
+  NsFlipTriggerDirective
 ];
 
 @NgModule({

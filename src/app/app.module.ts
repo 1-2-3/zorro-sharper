@@ -10,8 +10,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { registerLocaleData } from "@angular/common";
 import zh from "@angular/common/locales/zh";
-import { NsFormErrorTipService } from "projects/zorro-sharper/src/public-api";
-// import { NsFormErrorTipService } from "zorro-sharper";
+// import { NsFormErrorTipService } from "projects/zorro-sharper/src/public-api";
+import { NsFormErrorTipService } from "zorro-sharper";
 
 registerLocaleData(zh);
 

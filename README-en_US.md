@@ -18,9 +18,12 @@ English | [简体中文](README.md)
 - Simplified drop-down box physical pagination
 - Drop-down box auto assignment
 - Simplify form validation info
-- - Simplify form validation feedback
+- Simplify form validation feedback
+- 3D flip card
 
 <img src="src/assets/auto-height-card.gif" width = '500px'/>
+
+![](src/assets/flip-card-sm.gif)
 
 ## Installation
 

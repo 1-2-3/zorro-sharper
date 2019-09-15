@@ -15,3 +15,5 @@ export * from "./lib/service/ns-form-error-type";
 export * from "./lib/directives/ns-auto-height-st.directive";
 export * from "./lib/directives/ns-auto-height-tabset.directive";
 export * from "./lib/directives/ns-auto-feedback.directive";
+export * from "./lib/directives/ns-flip.directive";
+export * from "./lib/directives/ns-flip-trigger.directive";

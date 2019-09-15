@@ -1,0 +1,136 @@
+<h1>3D翻转卡片</h1>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="4">
+    <nz-card *nsFlipH="nzCardBackTpl" nzHoverable [nzCover]="coverTemplate">
+      <nz-card-meta nzTitle="卡片水平翻转" nzDescription="点击卡片翻转"></nz-card-meta>
+    </nz-card>
+    <ng-template #coverTemplate>
+      <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+    </ng-template>
+    <ng-template #nzCardBackTpl>
+      <div style="width:100%;height:100%;padding:16px;background-color: #0050b3;color:white;">
+        <p><b>背面</b></p>
+        <p>
+          只要在 nz-card 组件上添加 *nsFlipH="nzCardBackTpl" 指令即可。nzCardBackTpl
+          是卡片背面内容的模板。
+        </p>
+        <p>支持响应式布局。</p>
+      </div>
+    </ng-template>
+  </div>
+  <div nz-col nzSpan="4">
+    <nz-card *nsFlipH="nzCardBackTpl2" nzHoverable [nzCover]="coverTemplate2">
+      <nz-card-meta nzTitle="卡片水平翻转" [nzDescription]="cardDesc"></nz-card-meta>
+    </nz-card>
+    <ng-template #cardDesc>
+      使用按钮翻转
+      <button
+        nsFlipTrigger
+        nz-button
+        nzType="default"
+        nzShape="circle"
+        nzSize="small"
+        style="position: absolute;right: 8px;bottom: 8px;"
+      >
+        <i nz-icon nzType="ellipsis"></i>
+      </button>
+    </ng-template>
+    <ng-template #coverTemplate2>
+      <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+    </ng-template>
+    <ng-template #nzCardBackTpl2>
+      <div style="width:100%;height:100%;padding:16px;background-color: #0050b3;color:white;">
+        <p><b>背面</b></p>
+        <p>
+          默认点击卡片翻转，可通过在卡片内增加带有 nsFlipTrigger
+          指令的按钮或图标变更为点击按钮翻转的模式。
+        </p>
+        <button
+          nsFlipTrigger
+          nz-button
+          nzType="default"
+          nzShape="circle"
+          nzSize="small"
+          style="position: absolute;right: 8px;bottom: 8px;"
+        >
+          <i nz-icon nzType="left"></i>
+        </button>
+      </div>
+    </ng-template>
+  </div>
+  <div nz-col nzSpan="4">
+    <nz-card *nsFlipV="nzCardBackTpl3" nzHoverable [nzCover]="coverTemplate">
+      <nz-card-meta nzTitle="卡片竖直翻转" nzDescription="点击卡片翻转"></nz-card-meta>
+    </nz-card>
+    <ng-template #coverTemplate>
+      <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+    </ng-template>
+    <ng-template #nzCardBackTpl3>
+      <div style="width:100%;height:100%;padding:16px;background-color: #0050b3;color:white;">
+        <p><b>背面</b></p>
+        <p>
+          只要在 nz-card 组件上添加 *nsFlipV="nzCardBackTpl3" 指令即可。
+        </p>
+      </div>
+    </ng-template>
+  </div>
+  <div nz-col nzSpan="4">
+    <div *nsFlipH="backTpl" style="padding:16px;background-color:white; border:1px solid #e8e8e8;">
+      <p><b>普通DIV翻转</b></p>
+      <p>姓名：张三</p>
+      <p>性别：男</p>
+      <p><i>点击卡片翻转</i></p>
+    </div>
+    <ng-template #backTpl>
+      <div style="width:100%;height:100%;padding:16px;background-color: #0050b3;color:white;">
+        <p><b>背面</b></p>
+        <p>
+          只要在 div 上添加 *nsFlipH="backTpl" 指令即可。backTpl 是卡片背面内容的模板。
+        </p>
+        <p>支持响应式布局。</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<div nz-row [nzGutter]="16" style="margin-top:16px;">
+  <div nz-col>
+    <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
+      <ng-template #item let-item>
+        <nz-list-item [nzContent]="nzContent">
+          <ng-template #nzContent>
+            <nz-card *nsFlipH="listBackTpl" [nzTitle]="item.title">
+              <p>nz-list 内嵌 nz-card 的例子</p>
+              <p>用法与单个卡片类似。</p>
+            </nz-card>
+            <ng-template #listBackTpl>
+              <div
+                style="width:100%;height:100%;padding:16px;background-color: #0050b3;color:white;"
+              >
+                <p>
+                  <b>{{ item.title }} 背面</b>
+                </p>
+                <p>支持响应式布局。</p>
+              </div>
+            </ng-template>
+          </ng-template>
+        </nz-list-item>
+      </ng-template>
+    </nz-list>
+  </div>
+</div>
+<div nz-row [nzGutter]="16" style="margin-top:16px;">
+  <div nz-col>
+    完整示例请参考：
+    <a
+      target="_blank"
+      href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/pages/directive-demo/flip/flip-card-demo.componnet.html"
+      >flip-card-demo.componnet.html</a
+    >
+    &nbsp;
+    <a
+      target="_blank"
+      href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/pages/directive-demo/flip/flip-card-demo.componnet.ts"
+      >flip-card-demo.componnet.ts</a
+    >
+  </div>
+</div>

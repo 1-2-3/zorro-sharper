@@ -21,8 +21,11 @@
 - 下拉框自动赋值
 - 简化表单验证信息
 - 简化表单验证反馈
+- 3D 翻转卡片
 
 <img src="src/assets/auto-height-card.gif" width = '500px'/>
+
+![](src/assets/flip-card-sm.gif)
 
 ## 安装
 
