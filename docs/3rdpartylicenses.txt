@@ -275,6 +275,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ng-zorro-antd
 MIT
 
+ng-zorro-antd/avatar
+
 ng-zorro-antd/button
 
 ng-zorro-antd/card
@@ -293,15 +295,15 @@ ng-zorro-antd/input
 
 ng-zorro-antd/layout
 
+ng-zorro-antd/list
+
 ng-zorro-antd/menu
-
-ng-zorro-antd/notification
-
-undefined
 
 ng-zorro-antd/message
 
 ng-zorro-antd/modal
+
+ng-zorro-antd/notification
 
 ng-zorro-antd/pagination
 
@@ -345,6 +347,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+undefined
 
 rxjs
 Apache-2.0
