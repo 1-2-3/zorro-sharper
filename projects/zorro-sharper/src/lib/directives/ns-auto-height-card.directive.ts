@@ -1,4 +1,10 @@
-import { Directive, ElementRef, Input, Renderer } from "@angular/core";
+import {
+  Directive,
+  ElementRef,
+  Input,
+  Renderer2,
+  HostListener,
+} from "@angular/core";
 
 /**
  * 自适应页面高度的Card。
@@ -6,28 +12,47 @@ import { Directive, ElementRef, Input, Renderer } from "@angular/core";
  * 可设置自定义间距值，例：<nz-card nsAutoHeightCard="100">
  */
 @Directive({
-  selector: "[nsAutoHeightCard]"
+  selector: "[nsAutoHeightCard]",
 })
 export class NsAutoHeightCardDirective {
   private _offset = 27;
 
-  constructor(private el: ElementRef, private renderer: Renderer) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {}
 
-  ngAfterViewInit() {
-    let card = this.el.nativeElement;
-    let bodyDiv = card.querySelector(".ant-card-body");
-    let bodyTop = 0;
-    if (bodyDiv && bodyDiv.getBoundingClientRect && bodyDiv.getBoundingClientRect().top) {
-      bodyTop = bodyDiv.getBoundingClientRect().top;
-    }
+  /**
+   * 响应浏览器窗体大小变化
+   * @param event
+   */
+  @HostListener("window:resize", ["$event"])
+  onResize() {
+    this.doAutoSize();
+  }
 
-    if (bodyDiv) {
-      let topOffset = bodyTop + this._offset;
-      bodyDiv.style.height = `calc(100vh - ${topOffset}px)`;
-      bodyDiv.style["overflow-y"] = "auto"; // 自动出竖向滚动条
-    }
+  ngAfterViewInit() {
+    this.doAutoSize();
+  }
+
+  private doAutoSize() {
+    setTimeout(() => {
+      let card = this.el.nativeElement;
+      let bodyDiv = card.querySelector(".ant-card-body");
+      let bodyTop = 0;
+      if (
+        bodyDiv &&
+        bodyDiv.getBoundingClientRect &&
+        bodyDiv.getBoundingClientRect().top
+      ) {
+        bodyTop = bodyDiv.getBoundingClientRect().top;
+      }
+
+      if (bodyDiv) {
+        let topOffset = bodyTop + this._offset;
+        bodyDiv.style.height = `calc(100vh - ${topOffset}px)`;
+        bodyDiv.style["overflow-y"] = "auto"; // 自动出竖向滚动条
+      }
+    }, 2);
   }
 
   @Input()

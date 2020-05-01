@@ -1,4 +1,11 @@
-import { Component, Directive, ElementRef, Input, ViewContainerRef, Renderer } from "@angular/core";
+import {
+  Component,
+  Directive,
+  ElementRef,
+  Input,
+  HostListener,
+  ChangeDetectorRef,
+} from "@angular/core";
 import { STComponent } from "@delon/abc";
 
 /**
@@ -9,7 +16,7 @@ import { STComponent } from "@delon/abc";
  */
 @Directive({
   selector: "[nsAutoHeightST]",
-  host: {}
+  host: {},
 })
 export class NsAutoHeightSTDirective {
   @Input("nsAutoHeightST")
@@ -18,40 +25,56 @@ export class NsAutoHeightSTDirective {
   constructor(
     private element: ElementRef,
     private table: STComponent,
-    private container: ViewContainerRef,
-    private renderer: Renderer
-  ) {
+    private cd: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {}
+
+  /**
+   * 响应浏览器窗体大小变化
+   * @param event
+   */
+  @HostListener("window:resize", ["$event"])
+  onResize() {
+    this.doAutoSize();
+  }
+
+  ngAfterViewInit() {
+    this.doAutoSize();
+  }
+
+  private doAutoSize() {
     setTimeout(() => {
       let offset = this.offset || 70;
       if (
-        element &&
-        element.nativeElement &&
-        element.nativeElement.parentElement &&
-        element.nativeElement.parentElement.offsetHeight
+        this.element &&
+        this.element.nativeElement &&
+        this.element.nativeElement.parentElement &&
+        this.element.nativeElement.parentElement.offsetHeight
       ) {
-        if (table && table.scroll && table.scroll.x) {
-          table.scroll = {
+        if (this.table && this.table.scroll && this.table.scroll.x) {
+          this.table.scroll = {
             y:
               (
-                element.nativeElement.parentElement.offsetHeight -
-                element.nativeElement.offsetTop -
+                this.element.nativeElement.parentElement.offsetHeight -
+                this.element.nativeElement.offsetTop -
                 offset
               ).toString() + "px",
-            x: table.scroll.x
+            x: this.table.scroll.x,
           };
+          this.cd.detectChanges();
         } else {
-          table.scroll = {
+          this.table.scroll = {
             y:
               (
-                element.nativeElement.parentElement.offsetHeight -
-                element.nativeElement.offsetTop -
+                this.element.nativeElement.parentElement.offsetHeight -
+                this.element.nativeElement.offsetTop -
                 offset
-              ).toString() + "px"
+              ).toString() + "px",
           };
+          this.cd.detectChanges();
         }
       }
-    }, 0);
+    }, 10);
   }
-
-  ngOnInit() {}
 }

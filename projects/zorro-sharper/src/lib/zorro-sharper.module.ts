@@ -12,6 +12,9 @@ import { NsAutoHeightTabsetDirective } from "./directives/ns-auto-height-tabset.
 import { NsAutoFeedbackDirective } from "./directives/ns-auto-feedback.directive";
 import { NsFlipDirective } from "./directives/ns-flip.directive";
 import { NsFlipTriggerDirective } from "./directives/ns-flip-trigger.directive";
+import { NsFormLabelDirective } from "./directives/ns-form-label.directive";
+import { NsFormItemDirective } from "./directives/ns-form-item.directive";
+import { NsFormControlDirective } from "./directives/ns-form-control.directive";
 
 const DIRECTIVES = [
   NsAutoHeightCardDirective,
@@ -24,13 +27,16 @@ const DIRECTIVES = [
   NsAutoHeightTabsetDirective,
   NsAutoFeedbackDirective,
   NsFlipDirective,
-  NsFlipTriggerDirective
+  NsFlipTriggerDirective,
+  NsFormLabelDirective,
+  NsFormItemDirective,
+  NsFormControlDirective,
 ];
 
 @NgModule({
   declarations: [...DIRECTIVES, NsFormErrorTipsComponent],
   imports: [CommonModule],
   exports: [...DIRECTIVES],
-  entryComponents: [NsFormErrorTipsComponent]
+  entryComponents: [NsFormErrorTipsComponent],
 })
 export class ZorroSharperModule {}

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, Renderer } from "@angular/core";
+import { Directive, ElementRef, Input, Renderer2 } from "@angular/core";
 
 /**
  * 自适应页面高度的Div。
@@ -6,12 +6,12 @@ import { Directive, ElementRef, Input, Renderer } from "@angular/core";
  * 如果希望修改底部间距，可设置自定义间距值，例：<div ncFullHeightDiv="100">
  */
 @Directive({
-  selector: "[nsAutoHeightDiv]"
+  selector: "[nsAutoHeightDiv]",
 })
 export class NsAutoHeightDivDirective {
   private _offset = 27;
 
-  constructor(private el: ElementRef, private renderer: Renderer) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {}
 

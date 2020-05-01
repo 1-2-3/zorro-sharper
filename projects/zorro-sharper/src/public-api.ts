@@ -17,3 +17,6 @@ export * from "./lib/directives/ns-auto-height-tabset.directive";
 export * from "./lib/directives/ns-auto-feedback.directive";
 export * from "./lib/directives/ns-flip.directive";
 export * from "./lib/directives/ns-flip-trigger.directive";
+export * from "./lib/directives/ns-form-control.directive";
+export * from "./lib/directives/ns-form-item.directive";
+export * from "./lib/directives/ns-form-label.directive";

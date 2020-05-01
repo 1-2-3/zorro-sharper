@@ -1,15 +1,28 @@
-import { Directive, ElementRef, Input, Renderer, EventEmitter } from "@angular/core";
-import { NzTreeComponent, NzSelectComponent, NzFormDirective } from "ng-zorro-antd";
+import {
+  Directive,
+  ElementRef,
+  Input,
+  Renderer2,
+  EventEmitter,
+} from "@angular/core";
+import {
+  NzTreeComponent,
+  NzSelectComponent,
+  NzFormDirective,
+} from "ng-zorro-antd";
 import { FormGroup, FormGroupDirective } from "@angular/forms";
 
 /**
  * 下拉框选中项改变时，自动改变FormGroup中的中文描述字段
  */
 @Directive({
-  selector: "[nsSelectTextField]"
+  selector: "[nsSelectTextField]",
 })
 export class NsSelectTextFieldDirective {
-  constructor(private selectCmp: NzSelectComponent, private fg: FormGroupDirective) {}
+  constructor(
+    private selectCmp: NzSelectComponent,
+    private fg: FormGroupDirective
+  ) {}
 
   /**
    * 需要同步改变的文本字段名
@@ -19,7 +32,7 @@ export class NsSelectTextFieldDirective {
 
   ngOnInit() {
     let oldOnChange = this.selectCmp.onChange;
-    let newOnChange = v => {
+    let newOnChange = (v) => {
       if (
         this.selectCmp &&
         this.selectCmp.listOfNzOptionComponent &&
@@ -27,7 +40,7 @@ export class NsSelectTextFieldDirective {
       ) {
         // 按 value 获取选中的数据选项
         let selectedOptions = this.selectCmp.listOfNzOptionComponent.filter(
-          item => item.nzValue == v
+          (item) => item.nzValue == v
         );
 
         if (selectedOptions && selectedOptions.length) {
@@ -41,7 +54,9 @@ export class NsSelectTextFieldDirective {
               textFieldControl.setValue(selectedText); // 为文本字段赋值
             }
           } else {
-            console.error(`FormGroup中未定义名为 ${this.textFieldName} 的控件！`);
+            console.error(
+              `FormGroup中未定义名为 ${this.textFieldName} 的控件！`
+            );
           }
         }
 

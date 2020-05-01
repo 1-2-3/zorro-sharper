@@ -1,4 +1,12 @@
-import { Component, Directive, ElementRef, Input, ViewContainerRef, Renderer } from "@angular/core";
+import {
+  Component,
+  Directive,
+  ElementRef,
+  Input,
+  SimpleChange,
+  HostListener,
+  ChangeDetectorRef,
+} from "@angular/core";
 import { NzTableComponent } from "ng-zorro-antd";
 
 /**
@@ -9,7 +17,7 @@ import { NzTableComponent } from "ng-zorro-antd";
  */
 @Directive({
   selector: "[nsAutoHeightTable]",
-  host: {}
+  host: {},
 })
 export class NsAutoHeightTableDirective {
   @Input("nsAutoHeightTable")
@@ -18,19 +26,37 @@ export class NsAutoHeightTableDirective {
   constructor(
     private element: ElementRef,
     private table: NzTableComponent,
-    private container: ViewContainerRef,
-    private renderer: Renderer
+    private cd: ChangeDetectorRef
   ) {
     // 当前页码改变时自动回到顶部
     if (this.table && this.table.nzPageIndexChange) {
-      this.table.nzPageIndexChange.subscribe(index => {
-        let tableBody = this.element.nativeElement.querySelector(".ant-table-body");
+      this.table.nzPageIndexChange.subscribe((index) => {
+        let tableBody = this.element.nativeElement.querySelector(
+          ".ant-table-body"
+        );
         if (tableBody && tableBody.scrollTop) {
           tableBody.scrollTop = 0;
         }
       });
     }
+  }
 
+  /**
+   * 响应浏览器窗体大小变化
+   * @param event
+   */
+  @HostListener("window:resize", ["$event"])
+  onResize() {
+    this.doAutoSize();
+  }
+
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    this.doAutoSize();
+  }
+
+  private doAutoSize() {
     setTimeout(() => {
       let offset = this.offset || 70;
       if (
@@ -40,6 +66,9 @@ export class NsAutoHeightTableDirective {
         this.element.nativeElement.parentElement.offsetHeight
       ) {
         if (this.table && this.table.nzScroll && this.table.nzScroll.x) {
+          let originNzScroll = this.table.nzScroll
+            ? { ...this.table.nzScroll }
+            : null;
           this.table.nzScroll = {
             y:
               (
@@ -47,23 +76,41 @@ export class NsAutoHeightTableDirective {
                 this.element.nativeElement.offsetTop -
                 offset
               ).toString() + "px",
-            x: this.table.nzScroll.x
+            x: this.table.nzScroll.x,
           };
+          this.table.ngOnChanges({
+            nzScroll: new SimpleChange(
+              { originNzScroll },
+              this.table.nzScroll,
+              false
+            ),
+          });
+          this.cd.detectChanges();
         } else {
+          let originNzScroll = this.table.nzScroll
+            ? { ...this.table.nzScroll }
+            : null;
           this.table.nzScroll = {
-            y:
-              (
-                this.element.nativeElement.parentElement.offsetHeight -
-                this.element.nativeElement.offsetTop -
-                offset
-              ).toString() + "px"
+            ...{
+              y:
+                (
+                  this.element.nativeElement.parentElement.offsetHeight -
+                  this.element.nativeElement.offsetTop -
+                  offset
+                ).toString() + "px",
+            },
           };
+
+          this.table.ngOnChanges({
+            nzScroll: new SimpleChange(
+              { originNzScroll },
+              this.table.nzScroll,
+              false
+            ),
+          });
+          this.cd.detectChanges();
         }
       }
-    }, 0);
+    }, 10);
   }
-
-  ngOnInit() {}
-
-  ngAfterViewInit() {}
 }

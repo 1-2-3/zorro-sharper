@@ -1,11 +1,11 @@
-import { Directive, ElementRef, Input, Renderer } from "@angular/core";
+import { Directive, ElementRef, Input, Renderer2 } from "@angular/core";
 import { NsFlipDirective } from "./ns-flip.directive";
 
 /**
  * 标识使用按钮翻转卡片
  */
 @Directive({
-  selector: "[nsFlipTrigger]"
+  selector: "[nsFlipTrigger]",
 })
 export class NsFlipTriggerDirective {
   constructor() {}
