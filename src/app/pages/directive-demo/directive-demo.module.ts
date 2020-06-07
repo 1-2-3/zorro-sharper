@@ -15,6 +15,8 @@ import { FormErrorTipComponent } from "./form/form-error-tip.component";
 import { AutoHeightTabsetDemoComponent } from "./auto-height/auto-height-tabset-demo.component";
 import { FormAutoFeedBackComponent } from "./form/form-auto-feedback.componnet";
 import { FlipCardDemoComponnet } from "./flip/flip-card-demo.componnet";
+import { SlideoutDemoComponent } from "./slideout/slideout-demo.component";
+import { SlideoutContentComponent } from "./slideout/slideout-content.component";
 
 @NgModule({
   imports: [
@@ -24,7 +26,7 @@ import { FlipCardDemoComponnet } from "./flip/flip-card-demo.componnet";
     DirectiveDemoRoutingModule,
     NgZorroAntdModule,
     DelonABCModule,
-    ZorroSharperModule
+    ZorroSharperModule,
   ],
   declarations: [
     AutoHeightCardDemoComponent,
@@ -34,7 +36,9 @@ import { FlipCardDemoComponnet } from "./flip/flip-card-demo.componnet";
     FormErrorTipComponent,
     AutoHeightTabsetDemoComponent,
     FormAutoFeedBackComponent,
-    FlipCardDemoComponnet
-  ]
+    FlipCardDemoComponnet,
+    SlideoutDemoComponent,
+    SlideoutContentComponent,
+  ],
 })
 export class DirectiveDemoModule {}

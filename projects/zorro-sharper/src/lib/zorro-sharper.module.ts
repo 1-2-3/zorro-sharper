@@ -15,6 +15,11 @@ import { NsFlipTriggerDirective } from "./directives/ns-flip-trigger.directive";
 import { NsFormLabelDirective } from "./directives/ns-form-label.directive";
 import { NsFormItemDirective } from "./directives/ns-form-item.directive";
 import { NsFormControlDirective } from "./directives/ns-form-control.directive";
+import {
+  NsSlideoutDirective,
+  NsSlideoutComponent,
+} from "./directives/ns-slideout.directive";
+import { OverlayModule } from "@angular/cdk/overlay";
 
 const DIRECTIVES = [
   NsAutoHeightCardDirective,
@@ -31,12 +36,13 @@ const DIRECTIVES = [
   NsFormLabelDirective,
   NsFormItemDirective,
   NsFormControlDirective,
+  NsSlideoutDirective,
 ];
 
 @NgModule({
-  declarations: [...DIRECTIVES, NsFormErrorTipsComponent],
-  imports: [CommonModule],
+  declarations: [...DIRECTIVES, NsFormErrorTipsComponent, NsSlideoutComponent],
+  imports: [CommonModule, OverlayModule],
   exports: [...DIRECTIVES],
-  entryComponents: [NsFormErrorTipsComponent],
+  entryComponents: [NsFormErrorTipsComponent, NsSlideoutComponent],
 })
 export class ZorroSharperModule {}

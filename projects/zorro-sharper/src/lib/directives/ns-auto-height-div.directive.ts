@@ -16,17 +16,19 @@ export class NsAutoHeightDivDirective {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    let div = this.el.nativeElement;
-    let divTop = 0;
-    if (div && div.getBoundingClientRect && div.getBoundingClientRect().top) {
-      divTop = div.getBoundingClientRect().top;
-    }
+    Promise.resolve().then(() => {
+      let div = this.el.nativeElement;
+      let divTop = 0;
+      if (div && div.getBoundingClientRect && div.getBoundingClientRect().top) {
+        divTop = div.getBoundingClientRect().top;
+      }
 
-    if (div) {
-      let topOffset = divTop + this._offset;
-      div.style.height = `calc(100vh - ${topOffset}px)`;
-      div.style["overflow-y"] = "auto";
-    }
+      if (div) {
+        let topOffset = divTop + this._offset;
+        div.style.height = `calc(100vh - ${topOffset}px)`;
+        div.style["overflow-y"] = "auto";
+      }
+    });
   }
 
   @Input()
