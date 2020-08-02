@@ -1,4 +1,12 @@
-import { Directive, ElementRef, Input, Renderer2 } from "@angular/core";
+import {
+  Directive,
+  ElementRef,
+  Input,
+  Renderer2,
+  OnInit,
+  AfterViewInit,
+  DoCheck,
+} from "@angular/core";
 
 /**
  * 自适应页面高度的Div。
@@ -8,32 +16,49 @@ import { Directive, ElementRef, Input, Renderer2 } from "@angular/core";
 @Directive({
   selector: "[nsAutoHeightDiv]",
 })
-export class NsAutoHeightDivDirective {
+export class NsAutoHeightDivDirective
+  implements OnInit, AfterViewInit, DoCheck {
   private _offset = 27;
+  private divTop = 0;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {}
 
+  ngDoCheck(): void {
+    const div = this.el.nativeElement;
+    if (div && div.getBoundingClientRect && div.getBoundingClientRect().top) {
+      const currentDivTop = div.getBoundingClientRect().top;
+
+      if (this.divTop !== currentDivTop) {
+        this.resizeToFitContent();
+      }
+    }
+  }
+
   ngAfterViewInit() {
     Promise.resolve().then(() => {
-      let div = this.el.nativeElement;
-      let divTop = 0;
-      if (div && div.getBoundingClientRect && div.getBoundingClientRect().top) {
-        divTop = div.getBoundingClientRect().top;
-      }
-
-      if (div) {
-        let topOffset = divTop + this._offset;
-        div.style.height = `calc(100vh - ${topOffset}px)`;
-        div.style["overflow-y"] = "auto";
-      }
+      this.resizeToFitContent();
     });
+  }
+
+  private resizeToFitContent() {
+    const div = this.el.nativeElement;
+    this.divTop = 0;
+    if (div && div.getBoundingClientRect && div.getBoundingClientRect().top) {
+      this.divTop = div.getBoundingClientRect().top;
+    }
+
+    if (div) {
+      const topOffset = this.divTop + this._offset;
+      div.style.height = `calc(100vh - ${topOffset}px)`;
+      div.style["overflow-y"] = "auto";
+    }
   }
 
   @Input()
   set nsAutoHeightDiv(v: any) {
-    let value = parseInt(v);
+    const value = parseInt(v, 0);
     if (!isNaN(value) && value >= 0) {
       this._offset = value;
     }
