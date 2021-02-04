@@ -1,9 +1,9 @@
-import { Directive, ChangeDetectorRef } from "@angular/core";
-import { NzFormLabelComponent } from "ng-zorro-antd";
-import { NsFormItemDirective } from "./ns-form-item.directive";
+import { Directive, ChangeDetectorRef } from '@angular/core';
+import { NzFormLabelComponent } from 'ng-zorro-antd/form';
+import { NsFormItemDirective } from './ns-form-item.directive';
 
 @Directive({
-  selector: "[nsFormLabel]",
+  selector: '[nsFormLabel]',
 })
 export class NsFormLabelDirective {
   constructor(

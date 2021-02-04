@@ -4,7 +4,7 @@ import {
   Input,
   Renderer2,
   HostListener,
-} from "@angular/core";
+} from '@angular/core';
 
 /**
  * 自适应页面高度的Card。
@@ -12,7 +12,7 @@ import {
  * 可设置自定义间距值，例：<nz-card nsAutoHeightCard="100">
  */
 @Directive({
-  selector: "[nsAutoHeightCard]",
+  selector: '[nsAutoHeightCard]',
 })
 export class NsAutoHeightCardDirective {
   private _offset = 27;
@@ -25,7 +25,7 @@ export class NsAutoHeightCardDirective {
    * 响应浏览器窗体大小变化
    * @param event
    */
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onResize() {
     this.doAutoSize();
   }
@@ -36,8 +36,8 @@ export class NsAutoHeightCardDirective {
 
   private doAutoSize() {
     setTimeout(() => {
-      let card = this.el.nativeElement;
-      let bodyDiv = card.querySelector(".ant-card-body");
+      const card = this.el.nativeElement;
+      const bodyDiv = card.querySelector('.ant-card-body');
       let bodyTop = 0;
       if (
         bodyDiv &&
@@ -48,16 +48,16 @@ export class NsAutoHeightCardDirective {
       }
 
       if (bodyDiv) {
-        let topOffset = bodyTop + this._offset;
+        const topOffset = bodyTop + this._offset;
         bodyDiv.style.height = `calc(100vh - ${topOffset}px)`;
-        bodyDiv.style["overflow-y"] = "auto"; // 自动出竖向滚动条
+        bodyDiv.style['overflow-y'] = 'auto'; // 自动出竖向滚动条
       }
     }, 2);
   }
 
   @Input()
   set nsAutoHeightCard(v: any) {
-    let value = parseInt(v);
+    const value = parseInt(v);
     if (!isNaN(value) && value >= 0) {
       this._offset = value;
     }

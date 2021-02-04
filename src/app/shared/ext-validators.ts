@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, FormGroup } from "@angular/forms";
+import { AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
 
 export class ExtValidators {
   /**
@@ -7,7 +7,7 @@ export class ExtValidators {
    */
   static isInt(control: AbstractControl): ValidationErrors | null {
     if (control && control.value) {
-      let v = control.value.toString();
+      const v = control.value.toString();
       if (/^\d+$/.test(v)) {
         return null;
       } else {
@@ -23,13 +23,13 @@ export class ExtValidators {
    */
   static greateEqual(lhsControlName: string, rhsControlName: string, errMsg: string) {
     return (formGroup: FormGroup): { [key: string]: any } => {
-      let lhsControl = formGroup.get(lhsControlName);
-      let rhsControl = formGroup.get(rhsControlName);
+      const lhsControl = formGroup.get(lhsControlName);
+      const rhsControl = formGroup.get(rhsControlName);
 
       if (lhsControl && rhsControl) {
         let isValid = true;
-        let lhsFloat = parseFloat(lhsControl.value);
-        let rhsFloat = parseFloat(rhsControl.value);
+        const lhsFloat = parseFloat(lhsControl.value);
+        const rhsFloat = parseFloat(rhsControl.value);
 
         if (isNaN(lhsFloat) == false && isNaN(rhsFloat) == false && lhsFloat < rhsFloat) {
           isValid = false;

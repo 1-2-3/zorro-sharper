@@ -1,10 +1,10 @@
-import { Directive, ChangeDetectorRef } from "@angular/core";
-import { NzFormControlComponent } from "ng-zorro-antd";
-import { NsFormItemDirective } from "./ns-form-item.directive";
-import { FormControlName } from "@angular/forms";
+import { Directive, ChangeDetectorRef } from '@angular/core';
+import { NzFormControlComponent } from 'ng-zorro-antd/form';
+import { NsFormItemDirective } from './ns-form-item.directive';
+import { FormControlName } from '@angular/forms';
 
 @Directive({
-  selector: "[nsFormControl]",
+  selector: '[nsFormControl]',
 })
 export class NsFormControlDirective {
   constructor(

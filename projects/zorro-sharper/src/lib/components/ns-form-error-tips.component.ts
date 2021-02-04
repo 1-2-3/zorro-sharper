@@ -1,10 +1,10 @@
-import { Component, Input, HostBinding, SimpleChanges, ViewChild } from "@angular/core";
-import { NzFormItemComponent, NzFormControlComponent } from "ng-zorro-antd";
-import { NsFormErrorTipService } from "../service/ns-form-error-tip.service";
-import { NsFormErrorType } from "../service/ns-form-error-type";
+import { Component, Input, HostBinding, SimpleChanges, ViewChild } from '@angular/core';
+import { NzFormItemComponent, NzFormControlComponent } from 'ng-zorro-antd/form';
+import { NsFormErrorTipService } from '../service/ns-form-error-tip.service';
+import { NsFormErrorType } from '../service/ns-form-error-type';
 
 @Component({
-  selector: "ns-form-error-tips",
+  selector: 'ns-form-error-tips',
   template: `
     <ng-template #errorTpl let-control>
       <ng-container *ngFor="let err of errorTypes">
@@ -20,7 +20,7 @@ import { NsFormErrorType } from "../service/ns-form-error-type";
   `
 })
 export class NsFormErrorTipsComponent {
-  @ViewChild("errorTpl", { static: true }) _errorTpl;
+  @ViewChild('errorTpl', { static: true }) _errorTpl;
 
   constructor(private errorTipService: NsFormErrorTipService) {}
 

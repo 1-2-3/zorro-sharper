@@ -1,7 +1,7 @@
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { Subject } from "rxjs";
-import { debounceTime } from "rxjs/operators";
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 /**
  * 异步下拉框数据源
@@ -11,7 +11,7 @@ export class SelectAsyncDs {
   pageNum = 1;
   loading = false; // 是否正在请求数据
   allDataLoaded = false; // 是否所有数据都已加载完毕
-  query = "";
+  query = '';
   pageSize = 15;
   getPaggingListFunc: (pageNum, pageSize, query) => Observable<any>;
   doSearch$ = new Subject<any>();
@@ -20,7 +20,7 @@ export class SelectAsyncDs {
     this.getPaggingListFunc = getPaggingListFunc;
 
     this.doSearch$.pipe(debounceTime(300)).subscribe(v => {
-      this.query = v || "";
+      this.query = v || '';
       this.options = [];
       this.pageNum = 1;
       this.reload().subscribe();

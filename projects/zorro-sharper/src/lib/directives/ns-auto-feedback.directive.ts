@@ -4,7 +4,10 @@ import {
   EmbeddedViewRef,
   ViewContainerRef,
 } from "@angular/core";
-import { NzFormLabelComponent, NzFormControlComponent } from "ng-zorro-antd";
+import {
+  NzFormLabelComponent,
+  NzFormControlComponent,
+} from "ng-zorro-antd/form";
 
 /**
  * 简化表单验证反馈
@@ -13,30 +16,31 @@ import { NzFormLabelComponent, NzFormControlComponent } from "ng-zorro-antd";
   selector: "[nsAutoFeedback]",
 })
 export class NsAutoFeedbackDirective {
-  private _context: Context = new Context();
-  private _templateRef: TemplateRef<Context> | null = null;
-  private _viewRef: EmbeddedViewRef<Context> | null = null;
-
   constructor(
     private _viewContainer: ViewContainerRef,
     private templateRef: TemplateRef<Context>
   ) {
     this._templateRef = templateRef;
   }
+  private _context: Context = new Context();
+  private _templateRef: TemplateRef<Context> | null = null;
+  private _viewRef: EmbeddedViewRef<Context> | null = null;
 
+  private _labelCmp = null;
+
+  private _formControlCmp = null;
+
+  private _formControlNameDirective = null;
+  /*
   ngOnInit() {
     this._updateView();
   }
 
   ngDoCheck(): void {
-    if (
-      this._viewRef &&
-      this._viewRef["_view"] &&
-      this._viewRef["_view"].nodes
-    ) {
-      let label = this.getLabelCmp();
-      let control = this.getFormControlCmp();
-      let formControlName = this.getFormControlNameDirective();
+    if (this._viewRef && this._viewRef._view && this._viewRef._view.nodes) {
+      const label = this.getLabelCmp();
+      const control = this.getFormControlCmp();
+      const formControlName = this.getFormControlNameDirective();
 
       // 根据表单验证条件赋值 nzHasFeedback 和 nzRequired
       if (label && control) {
@@ -72,7 +76,7 @@ export class NsAutoFeedbackDirective {
           control.instance.elementRef &&
           control.instance.elementRef.nativeElement
         ) {
-          let editControl = control.instance.elementRef.nativeElement.querySelector(
+          const editControl = control.instance.elementRef.nativeElement.querySelector(
             "[formcontrolname]"
           );
           if (editControl) {
@@ -85,28 +89,24 @@ export class NsAutoFeedbackDirective {
   }
 
   ngAfterViewInit() {}
-
-  private _labelCmp = null;
   private getLabelCmp() {
     if (!this._labelCmp) {
-      this._labelCmp = this._viewRef["_view"].nodes.find(
+      this._labelCmp = this._viewRef._view.nodes.find(
         (n) =>
           n.instance &&
           n.instance.elementRef &&
           n.instance.elementRef.nativeElement &&
           n.instance.elementRef.nativeElement.localName == "nz-form-label"
-        //n.instance.constructor &&
-        //n.instance.constructor.name == "NzFormLabelComponent"
+        // n.instance.constructor &&
+        // n.instance.constructor.name == "NzFormLabelComponent"
       );
     }
 
     return this._labelCmp;
   }
-
-  private _formControlCmp = null;
   private getFormControlCmp() {
     if (!this._formControlCmp) {
-      this._formControlCmp = this._viewRef["_view"].nodes.find(
+      this._formControlCmp = this._viewRef._view.nodes.find(
         (n) =>
           n.instance &&
           n.instance.elementRef &&
@@ -119,11 +119,9 @@ export class NsAutoFeedbackDirective {
 
     return this._formControlCmp;
   }
-
-  private _formControlNameDirective = null;
   private getFormControlNameDirective() {
     if (!this._formControlNameDirective) {
-      this._formControlNameDirective = this._viewRef["_view"].nodes.find(
+      this._formControlNameDirective = this._viewRef._view.nodes.find(
         (n) =>
           n.instance &&
           n.instance.control &&
@@ -141,7 +139,12 @@ export class NsAutoFeedbackDirective {
       this._templateRef,
       this._context
     );
+    console.log(
+      `TCL- ~ NsAutoFeedbackDirective ~ _updateView ~ this._viewRef`,
+      this._viewRef
+    );
   }
+  */
 }
 
 class Context {

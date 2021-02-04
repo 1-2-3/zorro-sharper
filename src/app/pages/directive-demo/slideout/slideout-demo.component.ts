@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-slideout-demo",
-  styleUrls: ["./slideout-demo.component.less"],
-  templateUrl: "./slideout-demo.component.html",
+  selector: 'app-slideout-demo',
+  styleUrls: ['./slideout-demo.component.less'],
+  templateUrl: './slideout-demo.component.html',
 })
 export class SlideoutDemoComponent implements OnInit {
   constructor() {}

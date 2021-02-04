@@ -1,8 +1,8 @@
-import { Directive } from "@angular/core";
-import { NzFormLabelComponent, NzFormControlComponent } from "ng-zorro-antd";
+import { Directive } from '@angular/core';
+import { NzFormLabelComponent, NzFormControlComponent } from 'ng-zorro-antd/form';
 
 @Directive({
-  selector: "[nsFormItem]",
+  selector: '[nsFormItem]',
 })
 export class NsFormItemDirective {
   constructor() {}

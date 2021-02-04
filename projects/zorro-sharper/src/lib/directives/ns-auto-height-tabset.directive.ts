@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, Renderer2 } from "@angular/core";
+import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
 /**
  * 自适应页面高度的标签页。
@@ -6,7 +6,7 @@ import { Directive, ElementRef, Input, Renderer2 } from "@angular/core";
  * 如果希望修改底部间距，可设置自定义间距值，例：<nz-card nsAutoHeightTabset="100">
  */
 @Directive({
-  selector: "[nsAutoHeightTabset]",
+  selector: '[nsAutoHeightTabset]',
 })
 export class NsAutoHeightTabsetDirective {
   private _offset = 27;
@@ -17,9 +17,9 @@ export class NsAutoHeightTabsetDirective {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      let tabset = this.el.nativeElement;
-      let tabpaneList = tabset.querySelectorAll(".ant-tabs-tabpane");
-      for (let tabpane of tabpaneList) {
+      const tabset = this.el.nativeElement;
+      const tabpaneList = tabset.querySelectorAll('.ant-tabs-tabpane');
+      for (const tabpane of tabpaneList) {
         let tabpaneTop = 0;
         if (
           tabpane &&
@@ -30,9 +30,9 @@ export class NsAutoHeightTabsetDirective {
         }
 
         if (tabpane) {
-          let topOffset = tabpaneTop + this._offset;
+          const topOffset = tabpaneTop + this._offset;
           tabpane.style.height = `calc(100vh - ${topOffset}px)`;
-          tabpane.style["overflow-y"] = "auto"; // 自动出竖向滚动条
+          tabpane.style['overflow-y'] = 'auto'; // 自动出竖向滚动条
         }
       }
     }, 2);
@@ -40,7 +40,7 @@ export class NsAutoHeightTabsetDirective {
 
   @Input()
   set nsAutoHeightTabset(v: any) {
-    let value = parseInt(v);
+    const value = parseInt(v);
     if (!isNaN(value) && value >= 0) {
       this._offset = value;
     }

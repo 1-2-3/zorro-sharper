@@ -16,17 +16,17 @@ import {
   OnInit,
   OnChanges,
   AfterViewInit,
-} from "@angular/core";
-import { slideMotion } from "ng-zorro-antd";
+} from '@angular/core';
+import { slideMotion } from 'ng-zorro-antd/core/animation';
 import {
   CdkConnectedOverlay,
   CdkOverlayOrigin,
   ConnectedOverlayPositionChange,
   ConnectionPositionPair,
-} from "@angular/cdk/overlay";
+} from '@angular/cdk/overlay';
 
 @Directive({
-  selector: "[nsSlideout]",
+  selector: '[nsSlideout]',
 })
 export class NsSlideoutDirective implements OnInit, OnChanges, AfterViewInit {
   constructor(
@@ -36,7 +36,7 @@ export class NsSlideoutDirective implements OnInit, OnChanges, AfterViewInit {
     private renderer: Renderer2
   ) {}
 
-  @Input("nsSlideoutContent")
+  @Input('nsSlideoutContent')
   nsSlideoutContent: TemplateRef<void>;
 
   @Input() nsVisible: boolean;
@@ -76,14 +76,14 @@ export class NsSlideoutDirective implements OnInit, OnChanges, AfterViewInit {
   }
 
   private updateChangedProperties() {
-    this.updateComponentValue("nsSlideoutContent", this.nsSlideoutContent);
-    this.updateComponentValue("nsVisible", this.nsVisible);
+    this.updateComponentValue('nsSlideoutContent', this.nsSlideoutContent);
+    this.updateComponentValue('nsVisible', this.nsVisible);
 
     this.component.updateByDirective();
   }
 
   private updateComponentValue(key: string, value: any): void {
-    if (typeof value !== "undefined") {
+    if (typeof value !== 'undefined') {
       // @ts-ignore
       this.component[key] = value;
     }
@@ -91,7 +91,7 @@ export class NsSlideoutDirective implements OnInit, OnChanges, AfterViewInit {
 }
 
 @Component({
-  selector: "nsSlideoutCmp",
+  selector: 'nsSlideoutCmp',
   animations: [slideMotion],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -115,9 +115,9 @@ export class NsSlideoutComponent {
 
   nsSlideoutContent: TemplateRef<void>;
   origin: CdkOverlayOrigin;
-  @ViewChild("overlay", { static: false }) overlay: CdkConnectedOverlay;
+  @ViewChild('overlay', { static: false }) overlay: CdkConnectedOverlay;
   @Input() nsVisible: boolean;
-  slideMotionState = "top";
+  slideMotionState = 'top';
 
   updateByDirective(): void {
     this.cdr.detectChanges();
@@ -144,6 +144,6 @@ export class NsSlideoutComponent {
   }
 
   getSlideMotionState(position: ConnectedOverlayPositionChange) {
-    return position.connectionPair.overlayY === "bottom" ? "top" : "bottom";
+    return position.connectionPair.overlayY === 'bottom' ? 'top' : 'bottom';
   }
 }

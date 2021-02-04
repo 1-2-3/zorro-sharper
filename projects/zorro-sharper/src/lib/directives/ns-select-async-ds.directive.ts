@@ -5,15 +5,15 @@ import {
   TemplateRef,
   ViewContainerRef,
   ɵstringify as stringify
-} from "@angular/core";
-import { NzFormItemComponent, NzFormControlComponent } from "ng-zorro-antd";
-import { FormControl } from "@angular/forms";
+} from '@angular/core';
+import { NzFormItemComponent, NzFormControlComponent } from 'ng-zorro-antd/form';
+import { FormControl } from '@angular/forms';
 
 /**
  * 异步下拉框数据源指令
  */
 @Directive({
-  selector: "[nsSelectAsyncDs]"
+  selector: '[nsSelectAsyncDs]'
 })
 export class NsSelectAsyncDsDirective {
   private _context: Context = new Context();
@@ -24,7 +24,7 @@ export class NsSelectAsyncDsDirective {
     this._templateRef = templateRef;
   }
 
-  @Input("nsSelectAsyncDs")
+  @Input('nsSelectAsyncDs')
   set ds(v: any) {
     this._context.$implicit = v;
     this._updateView();

@@ -6,7 +6,7 @@ import {
   OnInit,
   AfterViewInit,
   DoCheck,
-} from "@angular/core";
+} from '@angular/core';
 
 /**
  * 自适应页面高度的Div。
@@ -14,7 +14,7 @@ import {
  * 如果希望修改底部间距，可设置自定义间距值，例：<div ncFullHeightDiv="100">
  */
 @Directive({
-  selector: "[nsAutoHeightDiv]",
+  selector: '[nsAutoHeightDiv]',
 })
 export class NsAutoHeightDivDirective
   implements OnInit, AfterViewInit, DoCheck {
@@ -52,7 +52,7 @@ export class NsAutoHeightDivDirective
     if (div) {
       const topOffset = this.divTop + this._offset;
       div.style.height = `calc(100vh - ${topOffset}px)`;
-      div.style["overflow-y"] = "auto";
+      div.style['overflow-y'] = 'auto';
     }
   }
 

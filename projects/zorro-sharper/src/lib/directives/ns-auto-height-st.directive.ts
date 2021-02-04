@@ -6,7 +6,7 @@ import {
   HostListener,
   ChangeDetectorRef,
 } from "@angular/core";
-import { STComponent } from "@delon/abc";
+import { STComponent } from "@delon/abc/st";
 
 /**
  * 根据SimpleTable内部Top位置，自动计算Scroll.height，达到自动出内部滚动条的效果。
@@ -45,7 +45,7 @@ export class NsAutoHeightSTDirective {
 
   private doAutoSize() {
     setTimeout(() => {
-      let offset = this.offset || 70;
+      const offset = this.offset || 70;
       if (
         this.element &&
         this.element.nativeElement &&

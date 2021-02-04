@@ -8,17 +8,18 @@ import {
   ElementRef,
   ComponentFactoryResolver,
   Type
-} from "@angular/core";
-import { FormControl } from "@angular/forms";
-import { NzFormControlComponent, NzEmptyComponent } from "ng-zorro-antd";
-import { NgTemplateOutlet } from "@angular/common";
-import { NsFormErrorTipsComponent } from "../components/ns-form-error-tips.component";
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { NzFormControlComponent } from 'ng-zorro-antd/form';
+import { NzEmptyComponent } from 'ng-zorro-antd/empty';
+import { NgTemplateOutlet } from '@angular/common';
+import { NsFormErrorTipsComponent } from '../components/ns-form-error-tips.component';
 
 /**
  * 自动附加验证错误信息模板
  */
 @Directive({
-  selector: "[nsErrorTip]"
+  selector: '[nsErrorTip]'
 })
 export class NsErrorTipDirective {
   constructor(
@@ -32,11 +33,11 @@ export class NsErrorTipDirective {
   }
 
   loadComponent() {
-    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       NsFormErrorTipsComponent
     );
-    let componentRef = this.viewContainer.createComponent(componentFactory);
-    var errorTpl = (<NsFormErrorTipsComponent>componentRef.instance).errorTpl;
+    const componentRef = this.viewContainer.createComponent(componentFactory);
+    const errorTpl = (componentRef.instance as NsFormErrorTipsComponent).errorTpl;
     this.formControl.nzErrorTip = errorTpl;
   }
 }

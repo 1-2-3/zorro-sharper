@@ -5,7 +5,7 @@ import {
   STColumnButton,
   STColumnBadge,
   STColumnTag,
-} from "@delon/abc";
+} from "@delon/abc/st";
 
 const BADGE: STColumnBadge = {
   1: { text: "成功", color: "success" },
@@ -49,6 +49,17 @@ export class AutoHeightTableDemoComponent implements OnInit {
   listOfAllData: Data[] = [];
   mapOfCheckedId: { [key: string]: boolean } = {};
   numberOfChecked = 0;
+
+  // 以下是 ng-alain 的 st 表格数据
+  users: any[] = [];
+  columns: STColumn[] = [
+    { title: "行号", type: "no" },
+    { title: "姓名", index: "name" },
+    { title: "年龄", index: "age", type: "number" },
+    { title: "tag", index: "tag", type: "tag", tag: TAG },
+    { title: "badge", index: "badge", type: "badge", badge: BADGE },
+    { title: "yn", index: "yn", type: "yn" },
+  ];
 
   currentPageDataChange($event: Data[]): void {
     this.listOfDisplayData = $event;
@@ -100,17 +111,6 @@ export class AutoHeightTableDemoComponent implements OnInit {
 
     this.reload();
   }
-
-  // 以下是 ng-alain 的 st 表格数据
-  users: any[] = [];
-  columns: STColumn[] = [
-    { title: "行号", type: "no" },
-    { title: "姓名", index: "name" },
-    { title: "年龄", index: "age", type: "number" },
-    { title: "tag", index: "tag", type: "tag", tag: TAG },
-    { title: "badge", index: "badge", type: "badge", badge: BADGE },
-    { title: "yn", index: "yn", type: "yn" },
-  ];
 
   reload() {
     this.users = Array(60)

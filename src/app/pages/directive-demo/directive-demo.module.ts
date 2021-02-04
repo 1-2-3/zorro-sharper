@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { NgZorroAntdModule } from "ng-zorro-antd";
-import { DelonABCModule } from "@delon/abc";
 // import { ZorroSharperModule } from "zorro-sharper";
 import { ZorroSharperModule } from "../../../../projects/zorro-sharper/src/lib/zorro-sharper.module";
 
@@ -24,8 +22,6 @@ import { SlideoutContentComponent } from "./slideout/slideout-content.component"
     ReactiveFormsModule,
     FormsModule,
     DirectiveDemoRoutingModule,
-    NgZorroAntdModule,
-    DelonABCModule,
     ZorroSharperModule,
   ],
   declarations: [
