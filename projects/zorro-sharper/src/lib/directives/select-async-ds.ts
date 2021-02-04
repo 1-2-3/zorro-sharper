@@ -19,7 +19,7 @@ export class SelectAsyncDs {
   constructor(getPaggingListFunc: (pageNum, pageSize, quer) => Observable<any>) {
     this.getPaggingListFunc = getPaggingListFunc;
 
-    this.doSearch$.pipe(debounceTime(300)).subscribe(v => {
+    this.doSearch$.pipe(debounceTime(300)).subscribe((v) => {
       this.query = v || '';
       this.options = [];
       this.pageNum = 1;
@@ -27,7 +27,7 @@ export class SelectAsyncDs {
     });
   }
 
-  onSearch = v => {
+  onSearch = (v) => {
     this.doSearch$.next(v);
   };
 
@@ -38,7 +38,7 @@ export class SelectAsyncDs {
         this.loading = false;
         this.options = data;
         return this.options;
-      })
+      }),
     );
   }
 
@@ -56,20 +56,18 @@ export class SelectAsyncDs {
     this.pageNum += 1;
 
     this.loading = true;
-    return this.getPaggingListFunc(this.pageNum, this.pageSize, this.query).subscribe(
-      (data: any[]) => {
-        // 判断是否已加载了全部数据
-        if (!data || data.length <= 0) {
-          this.allDataLoaded = true;
-        }
-
-        this.loading = false;
-        this.options = [...this.options, ...data];
+    return this.getPaggingListFunc(this.pageNum, this.pageSize, this.query).subscribe((data: any[]) => {
+      // 判断是否已加载了全部数据
+      if (!data || data.length <= 0) {
+        this.allDataLoaded = true;
       }
-    );
+
+      this.loading = false;
+      this.options = [...this.options, ...data];
+    });
   }
 
   appendOption(dto: any, getIdFunc: (dto: any) => string) {
-    this.options = [dto, ...this.options.filter(t => getIdFunc(t) != getIdFunc(dto))];
+    this.options = [dto, ...this.options.filter((t) => getIdFunc(t) !== getIdFunc(dto))];
   }
 }

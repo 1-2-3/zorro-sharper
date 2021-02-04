@@ -7,7 +7,8 @@ import {
   ɵstringify as stringify,
   ElementRef,
   ComponentFactoryResolver,
-  Type
+  Type,
+  OnInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NzFormControlComponent } from 'ng-zorro-antd/form';
@@ -19,13 +20,14 @@ import { NsFormErrorTipsComponent } from '../components/ns-form-error-tips.compo
  * 自动附加验证错误信息模板
  */
 @Directive({
-  selector: '[nsErrorTip]'
+  // tslint:disable-next-line: directive-selector
+  selector: '[nsErrorTip]',
 })
-export class NsErrorTipDirective {
+export class NsErrorTipDirective implements OnInit {
   constructor(
     private viewContainer: ViewContainerRef,
     private formControl: NzFormControlComponent,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
   ) {}
 
   ngOnInit() {
@@ -33,9 +35,7 @@ export class NsErrorTipDirective {
   }
 
   loadComponent() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-      NsFormErrorTipsComponent
-    );
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(NsFormErrorTipsComponent);
     const componentRef = this.viewContainer.createComponent(componentFactory);
     const errorTpl = (componentRef.instance as NsFormErrorTipsComponent).errorTpl;
     this.formControl.nzErrorTip = errorTpl;

@@ -3,7 +3,6 @@ import { AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
 export class ExtValidators {
   /**
    * 验证是整数
-   * @param control
    */
   static isInt(control: AbstractControl): ValidationErrors | null {
     if (control && control.value) {
@@ -31,7 +30,7 @@ export class ExtValidators {
         const lhsFloat = parseFloat(lhsControl.value);
         const rhsFloat = parseFloat(rhsControl.value);
 
-        if (isNaN(lhsFloat) == false && isNaN(rhsFloat) == false && lhsFloat < rhsFloat) {
+        if (isNaN(lhsFloat) === false && isNaN(rhsFloat) === false && lhsFloat < rhsFloat) {
           isValid = false;
         }
 
@@ -39,10 +38,10 @@ export class ExtValidators {
           return null;
         } else {
           lhsControl.setErrors({
-            greateEqual: { msg: errMsg }
+            greateEqual: { msg: errMsg },
           });
           rhsControl.setErrors({
-            greateEqual: { msg: errMsg }
+            greateEqual: { msg: errMsg },
           });
           return { greateEqual: { msg: errMsg } };
         }

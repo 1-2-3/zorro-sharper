@@ -1,12 +1,7 @@
 <h1>简化表单验证反馈</h1>
-<div nz-row [nzGutter]="32" style="background-color: white;">
-  <div nz-col nzSpan="6" style="border: 1px solid #1890ff; padding-top: 16px;">
-    <form
-      nz-form
-      [formGroup]="formGroup"
-      (ngSubmit)="submit()"
-      nzType="horizontal"
-    >
+<div nz-row [nzGutter]="32" style="background-color: white">
+  <div nz-col nzSpan="6" style="border: 1px solid #1890ff; padding-top: 16px">
+    <form nz-form [formGroup]="formGroup" (ngSubmit)="submit()" nzType="horizontal">
       <div nz-row>
         <div nz-col nzSpan="24">
           <nz-form-item nsFormItem>
@@ -32,20 +27,17 @@
             </nz-form-control>
           </nz-form-item>
         </div>
-        <div nz-col nzSpan="24" style="text-align: right; margin-bottom: 16px;">
+        <div nz-col nzSpan="24" style="text-align: right; margin-bottom: 16px">
           <button nz-button [nzType]="'primary'">保存</button>
         </div>
       </div>
     </form>
   </div>
   <div nz-col nzSpan="18">
-    <p>
-      在表单验证视觉反馈这一块有下列比较<b>麻烦</b>的事情需要我们<b>手工</b>来做：
-    </p>
+    <p>在表单验证视觉反馈这一块有下列比较<b>麻烦</b>的事情需要我们<b>手工</b>来做：</p>
     <ul>
       <li>
-        如果是必填项，需要为 nz-form-label 增加 <b>nzRequired</b> 属性以便在
-        label 前面显示红色的 “*” 表示是必填项
+        如果是必填项，需要为 nz-form-label 增加 <b>nzRequired</b> 属性以便在 label 前面显示红色的 “*” 表示是必填项
       </li>
       <li>
         如果组件指定了必填等验证条件，需要为 nz-form-control 组件增加
@@ -54,8 +46,7 @@
       </li>
       <li>
         如果组件未指定任何验证条件，不要给 nz-form-control 组件增加
-        <b>nzHasFeedback</b
-        >，否则执行表单验证后该组件显示了绿色的对号图标也很奇怪。
+        <b>nzHasFeedback</b>，否则执行表单验证后该组件显示了绿色的对号图标也很奇怪。
       </li>
     </ul>
     <p>
@@ -63,9 +54,7 @@
       <b>nsFormItem、nsFormLabel、nsFormControl</b>
       指令，就可以一次将上述工作自动完成。
     </p>
-    <p>
-      示例：
-    </p>
+    <p>示例：</p>
     <pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">form
     </span><span style="color: #ff0000;">nz-form
     [formGroup]</span><span style="color: #0000ff;">="formGroup"</span><span style="color: #ff0000;">

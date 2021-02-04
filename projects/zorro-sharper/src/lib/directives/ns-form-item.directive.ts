@@ -2,6 +2,7 @@ import { Directive } from '@angular/core';
 import { NzFormLabelComponent, NzFormControlComponent } from 'ng-zorro-antd/form';
 
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: '[nsFormItem]',
 })
 export class NsFormItemDirective {

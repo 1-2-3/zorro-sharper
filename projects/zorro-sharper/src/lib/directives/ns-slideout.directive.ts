@@ -25,72 +25,8 @@ import {
   ConnectionPositionPair,
 } from '@angular/cdk/overlay';
 
-@Directive({
-  selector: '[nsSlideout]',
-})
-export class NsSlideoutDirective implements OnInit, OnChanges, AfterViewInit {
-  constructor(
-    private elementRef: ElementRef,
-    private hostView: ViewContainerRef,
-    private resolver: ComponentFactoryResolver,
-    private renderer: Renderer2
-  ) {}
-
-  @Input('nsSlideoutContent')
-  nsSlideoutContent: TemplateRef<void>;
-
-  @Input() nsVisible: boolean;
-
-  componentFactory: ComponentFactory<NsSlideoutComponent>;
-  component: NsSlideoutComponent;
-
-  ngOnInit() {
-    this.componentFactory = this.resolver.resolveComponentFactory(
-      NsSlideoutComponent
-    );
-  }
-
-  ngAfterViewInit() {
-    this.createComponent();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.component) {
-      this.updateChangedProperties();
-    }
-  }
-
-  private createComponent(): void {
-    const componentRef = this.hostView.createComponent(this.componentFactory);
-
-    this.component = componentRef.instance;
-
-    // Remove the component's DOM because it should be in the overlay container.
-    this.renderer.removeChild(
-      this.renderer.parentNode(this.elementRef.nativeElement),
-      componentRef.location.nativeElement
-    );
-    this.component.setOverlayOrigin({ elementRef: this.elementRef });
-
-    this.updateChangedProperties();
-  }
-
-  private updateChangedProperties() {
-    this.updateComponentValue('nsSlideoutContent', this.nsSlideoutContent);
-    this.updateComponentValue('nsVisible', this.nsVisible);
-
-    this.component.updateByDirective();
-  }
-
-  private updateComponentValue(key: string, value: any): void {
-    if (typeof value !== 'undefined') {
-      // @ts-ignore
-      this.component[key] = value;
-    }
-  }
-}
-
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'nsSlideoutCmp',
   animations: [slideMotion],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -133,7 +69,7 @@ export class NsSlideoutComponent {
   }
 
   onPositionChange(position: ConnectedOverlayPositionChange): void {
-    this.slideMotionState = this.getSlideMotionState(position)!;
+    this.slideMotionState = this.getSlideMotionState(position);
     this.cdr.detectChanges();
   }
 
@@ -145,5 +81,69 @@ export class NsSlideoutComponent {
 
   getSlideMotionState(position: ConnectedOverlayPositionChange) {
     return position.connectionPair.overlayY === 'bottom' ? 'top' : 'bottom';
+  }
+}
+
+@Directive({
+  // tslint:disable-next-line: directive-selector
+  selector: '[nsSlideout]',
+})
+export class NsSlideoutDirective implements OnInit, OnChanges, AfterViewInit {
+  constructor(
+    private elementRef: ElementRef,
+    private hostView: ViewContainerRef,
+    private resolver: ComponentFactoryResolver,
+    private renderer: Renderer2,
+  ) {}
+
+  @Input()
+  nsSlideoutContent: TemplateRef<void>;
+
+  @Input() nsVisible: boolean;
+
+  componentFactory: ComponentFactory<NsSlideoutComponent>;
+  component: NsSlideoutComponent;
+
+  ngOnInit() {
+    this.componentFactory = this.resolver.resolveComponentFactory(NsSlideoutComponent);
+  }
+
+  ngAfterViewInit() {
+    this.createComponent();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.component) {
+      this.updateChangedProperties();
+    }
+  }
+
+  private createComponent(): void {
+    const componentRef = this.hostView.createComponent(this.componentFactory);
+
+    this.component = componentRef.instance;
+
+    // Remove the component's DOM because it should be in the overlay container.
+    this.renderer.removeChild(
+      this.renderer.parentNode(this.elementRef.nativeElement),
+      componentRef.location.nativeElement,
+    );
+    this.component.setOverlayOrigin({ elementRef: this.elementRef });
+
+    this.updateChangedProperties();
+  }
+
+  private updateChangedProperties() {
+    this.updateComponentValue('nsSlideoutContent', this.nsSlideoutContent);
+    this.updateComponentValue('nsVisible', this.nsVisible);
+
+    this.component.updateByDirective();
+  }
+
+  private updateComponentValue(key: string, value: any): void {
+    if (typeof value !== 'undefined') {
+      // @ts-ignore
+      this.component[key] = value;
+    }
   }
 }

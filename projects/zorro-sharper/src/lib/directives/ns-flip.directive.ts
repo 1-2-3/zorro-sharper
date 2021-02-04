@@ -5,7 +5,9 @@ import {
   ViewContainerRef,
   Input,
   Renderer2,
-  NgZone
+  DoCheck,
+  AfterViewInit,
+  OnInit,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
@@ -14,14 +16,14 @@ import { throttleTime } from 'rxjs/operators';
  * 3D翻转卡片
  */
 @Directive({
-  selector: '[nsFlipH],[nsFlipV]'
+  // tslint:disable-next-line: directive-selector
+  selector: '[nsFlipH],[nsFlipV]',
 })
-export class NsFlipDirective {
-
+export class NsFlipDirective implements OnInit, AfterViewInit, DoCheck {
   constructor(
     private _viewContainer: ViewContainerRef,
     private _templateRef: TemplateRef<void>,
-    private _renderer: Renderer2
+    private _renderer: Renderer2,
   ) {
     this._onResize$.pipe(throttleTime(2)).subscribe(() => {
       // 将背面的位置和大小设置成与正面相同
@@ -29,7 +31,7 @@ export class NsFlipDirective {
         const frontBound = this._frontDiv.getBoundingClientRect();
         const backBound = this._backDiv.getBoundingClientRect();
 
-        if (frontBound.height != backBound.height) {
+        if (frontBound.height !== backBound.height) {
           this._renderer.setStyle(this._backDiv, 'height', `${frontBound.height}px`);
           this._renderer.setStyle(this._backDiv, 'margin-top', `-${frontBound.height}px`);
         }
@@ -70,30 +72,22 @@ export class NsFlipDirective {
 
   ngAfterViewInit(): void {
     // 设置点击事件
-    if (
-      this._frontDiv &&
-      this._frontDiv.querySelector &&
-      this._frontDiv.querySelector('[nsFlipTrigger]')
-    ) {
+    if (this._frontDiv && this._frontDiv.querySelector && this._frontDiv.querySelector('[nsFlipTrigger]')) {
       const trigger = this._frontDiv.querySelector('[nsFlipTrigger]');
-      this._renderer.listen(trigger, 'click', e => {
+      this._renderer.listen(trigger, 'click', (e) => {
         e.stopPropagation();
         this.flipCardH();
       });
     } else {
-      this._renderer.listen(this._cardDiv, 'click', e => {
+      this._renderer.listen(this._cardDiv, 'click', (e) => {
         e.stopPropagation();
         this.flipCardH();
       });
     }
 
-    if (
-      this._backDiv &&
-      this._backDiv.querySelector &&
-      this._backDiv.querySelector('[nsFlipTrigger]')
-    ) {
+    if (this._backDiv && this._backDiv.querySelector && this._backDiv.querySelector('[nsFlipTrigger]')) {
       const trigger = this._backDiv.querySelector('[nsFlipTrigger]');
-      this._renderer.listen(trigger, 'click', e => {
+      this._renderer.listen(trigger, 'click', (e) => {
         e.stopPropagation();
         this.flipCardH();
       });
@@ -104,7 +98,7 @@ export class NsFlipDirective {
     this._flipDeAngle += 180;
     this._flipDeAngle %= 360;
 
-    if (this._flipDeAngle == 0) {
+    if (this._flipDeAngle === 0) {
       this._renderer.setStyle(this._frontDiv, 'pointer-events', `all`);
       this._renderer.setStyle(this._backDiv, 'pointer-events', `none`);
     } else {
@@ -112,7 +106,7 @@ export class NsFlipDirective {
       this._renderer.setStyle(this._backDiv, 'pointer-events', `all`);
     }
 
-    if (this._flipType == 'Horizontal') {
+    if (this._flipType === 'Horizontal') {
       this._renderer.setStyle(this._cardDiv, 'transform', `rotateY(${this._flipDeAngle}deg)`);
     } else {
       this._renderer.setStyle(this._cardDiv, 'transform', `rotateX(${this._flipDeAngle}deg)`);
@@ -163,7 +157,7 @@ export class NsFlipDirective {
     this._renderer.setStyle(frontDiv, 'backface-visibility', 'hidden');
     this._renderer.setStyle(backDiv, 'backface-visibility', 'hidden');
 
-    if (this._flipType == 'Horizontal') {
+    if (this._flipType === 'Horizontal') {
       this._renderer.setStyle(backDiv, 'transform', 'rotateY(180deg)');
     } else {
       this._renderer.setStyle(backDiv, 'transform', 'rotateX(180deg)');

@@ -1,12 +1,7 @@
 <h1>简化表单Label</h1>
-<div nz-row [nzGutter]="32" style="background-color: white;">
-  <div nz-col nzSpan="6" style="border: 1px solid #1890ff; padding-top: 16px;">
-    <form
-      nz-form
-      [formGroup]="formGroup"
-      (ngSubmit)="submit()"
-      nzType="horizontal"
-    >
+<div nz-row [nzGutter]="32" style="background-color: white">
+  <div nz-col nzSpan="6" style="border: 1px solid #1890ff; padding-top: 16px">
+    <form nz-form [formGroup]="formGroup" (ngSubmit)="submit()" nzType="horizontal">
       <div nz-row>
         <div nz-col nzSpan="24">
           <nz-form-item>
@@ -40,7 +35,7 @@
             </nz-form-control>
           </nz-form-item>
         </div>
-        <div nz-col nzSpan="24" style="text-align: right; margin-bottom: 16px;">
+        <div nz-col nzSpan="24" style="text-align: right; margin-bottom: 16px">
           <button nz-button [nzType]="'primary'">保存</button>
         </div>
       </div>
@@ -48,13 +43,13 @@
   </div>
   <div nz-col nzSpan="18">
     <p>
-      像必填项等常规验证消息，适合<b>统一处理</b>而不应该在每个表单都<b>重复</b>一遍。90%
-      的表单项都只需要放置一个 nsErrorTip 即可自动显示合适的验证错误信息：
+      像必填项等常规验证消息，适合<b>统一处理</b>而不应该在每个表单都<b>重复</b>一遍。90% 的表单项都只需要放置一个
+      nsErrorTip 即可自动显示合适的验证错误信息：
     </p>
     <p>
       <b>* 注：</b>ng-zorro 9.1.0 新增的 nzAutoTips
-      指令在大部分情况下是更简单的解决方案，同样支持全局配置和自定义验证信息，推荐优先考虑使用
-      nzAutoTips 指令。详见官方文档：https://ng.ant.design/components/form/zh
+      指令在大部分情况下是更简单的解决方案，同样支持全局配置和自定义验证信息，推荐优先考虑使用 nzAutoTips
+      指令。详见官方文档：https://ng.ant.design/components/form/zh
     </p>
     <pre>
     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">form </span><span style="color: #ff0000;">nz-form [formGroup]</span><span style="color: #0000ff;">="formGroup"</span><span style="color: #ff0000;"> (ngSubmit)</span><span style="color: #0000ff;">="submit()"</span><span style="color: #ff0000;"> nzType</span><span style="color: #0000ff;">="horizontal"</span><span style="color: #0000ff;">&gt;</span>
@@ -96,10 +91,7 @@
         <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
       <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">div</span><span style="color: #0000ff;">&gt;</span>
     <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">form</span><span style="color: #0000ff;">&gt;</span></pre>
-    <p>
-      当然，错误信息不可能凭空出现。我们需要在 AppModule
-      中预先注册错误类型和默认的错误提示信息：
-    </p>
+    <p>当然，错误信息不可能凭空出现。我们需要在 AppModule 中预先注册错误类型和默认的错误提示信息：</p>
     <pre>
       <span style="color: #000000;">export class AppModule {{'{'}}
         constructor(private errorTipService: NsFormErrorTipService) {{'{'}}
@@ -108,10 +100,7 @@
           errorTipService.registerErrorType({{'{'}} errorType: </span>"greateEqual", defaultMessage: ""<span style="color: #000000;"> {{'}'}});
         {{'}'}}
       {{'}'}}</span></pre>
-    <p>
-      对于需要在验证方法中输出错误信息的情况，约定由验证方法返回带有 "msg"
-      属性的对象：
-    </p>
+    <p>对于需要在验证方法中输出错误信息的情况，约定由验证方法返回带有 "msg" 属性的对象：</p>
     <pre>
     <span style="color: #000000;">export class ExtValidators {{'{'}}
       </span><span style="color: #008000;">/*</span><span style="color: #008000;">*
@@ -143,14 +132,10 @@
         href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/pages/directive-demo/form/form-error-tip.component.ts"
         >form-error-tip.component.ts</a
       >&nbsp;
-      <a
-        target="_blank"
-        href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/shared/ext-validators.ts"
+      <a target="_blank" href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/shared/ext-validators.ts"
         >ext-validators.ts</a
       >&nbsp;
-      <a
-        target="_blank"
-        href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/app.module.ts"
+      <a target="_blank" href="https://github.com/1-2-3/zorro-sharper/blob/master/src/app/app.module.ts"
         >app.module.ts</a
       >
     </p>

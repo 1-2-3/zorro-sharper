@@ -4,19 +4,24 @@ import {
   Input,
   TemplateRef,
   ViewContainerRef,
-  ɵstringify as stringify
+  ɵstringify as stringify,
 } from '@angular/core';
 import { NzFormItemComponent, NzFormControlComponent } from 'ng-zorro-antd/form';
 import { FormControl } from '@angular/forms';
+
+class Context {
+  public $implicit: any = null;
+}
 
 /**
  * 异步下拉框数据源指令
  */
 @Directive({
-  selector: '[nsSelectAsyncDs]'
+  // tslint:disable-next-line: directive-selector
+  selector: '[nsSelectAsyncDs]',
 })
 export class NsSelectAsyncDsDirective {
-  private _context: Context = new Context();
+  private _context = new Context();
   private _templateRef: TemplateRef<Context> | null = null;
   private _viewRef: EmbeddedViewRef<Context> | null = null;
 
@@ -33,8 +38,4 @@ export class NsSelectAsyncDsDirective {
   private _updateView() {
     this._viewRef = this._viewContainer.createEmbeddedView(this._templateRef, this._context);
   }
-}
-
-class Context {
-  public $implicit: any = null;
 }

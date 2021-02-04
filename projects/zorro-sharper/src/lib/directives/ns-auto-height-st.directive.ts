@@ -5,6 +5,8 @@ import {
   Input,
   HostListener,
   ChangeDetectorRef,
+  OnInit,
+  AfterViewInit,
 } from '@angular/core';
 import { STComponent } from '@delon/abc/st';
 
@@ -15,24 +17,19 @@ import { STComponent } from '@delon/abc/st';
  * 需要自定义偏移量时，可使用：<st nsAutoHeightST="100"></st>
  */
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: '[nsAutoHeightST]',
-  host: {},
 })
-export class NsAutoHeightSTDirective {
+export class NsAutoHeightSTDirective implements OnInit, AfterViewInit {
   @Input('nsAutoHeightST')
   offset: number;
 
-  constructor(
-    private element: ElementRef,
-    private table: STComponent,
-    private cd: ChangeDetectorRef
-  ) {}
+  constructor(private element: ElementRef, private table: STComponent, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {}
 
   /**
    * 响应浏览器窗体大小变化
-   * @param event
    */
   @HostListener('window:resize', ['$event'])
   onResize() {

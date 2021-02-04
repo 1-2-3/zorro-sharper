@@ -1,10 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  Input,
-  Renderer2,
-  HostListener,
-} from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2, HostListener, OnInit, AfterViewInit } from '@angular/core';
 
 /**
  * 自适应页面高度的Card。
@@ -12,9 +6,10 @@ import {
  * 可设置自定义间距值，例：<nz-card nsAutoHeightCard="100">
  */
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: '[nsAutoHeightCard]',
 })
-export class NsAutoHeightCardDirective {
+export class NsAutoHeightCardDirective implements OnInit, AfterViewInit {
   private _offset = 27;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
@@ -23,7 +18,6 @@ export class NsAutoHeightCardDirective {
 
   /**
    * 响应浏览器窗体大小变化
-   * @param event
    */
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -39,11 +33,7 @@ export class NsAutoHeightCardDirective {
       const card = this.el.nativeElement;
       const bodyDiv = card.querySelector('.ant-card-body');
       let bodyTop = 0;
-      if (
-        bodyDiv &&
-        bodyDiv.getBoundingClientRect &&
-        bodyDiv.getBoundingClientRect().top
-      ) {
+      if (bodyDiv && bodyDiv.getBoundingClientRect && bodyDiv.getBoundingClientRect().top) {
         bodyTop = bodyDiv.getBoundingClientRect().top;
       }
 
@@ -57,7 +47,7 @@ export class NsAutoHeightCardDirective {
 
   @Input()
   set nsAutoHeightCard(v: any) {
-    const value = parseInt(v);
+    const value = parseInt(v, 0);
     if (!isNaN(value) && value >= 0) {
       this._offset = value;
     }

@@ -10,28 +10,17 @@
     <div class="sidebar-logo">
       <h1>ZORRO Sharper Demo</h1>
     </div>
-    <ul
-      nz-menu
-      nzTheme="light"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-    >
+    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="功能指令集">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/directives/auto-height-card-demo"
-              >自适应高度卡片和DIV</a
-            >
+            <a routerLink="/directives/auto-height-card-demo">自适应高度卡片和DIV</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/directives/auto-height-tabset-demo"
-              >自适应高度标签页</a
-            >
+            <a routerLink="/directives/auto-height-tabset-demo">自适应高度标签页</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/directives/auto-height-table-demo"
-              >自适应高度表格</a
-            >
+            <a routerLink="/directives/auto-height-table-demo">自适应高度表格</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/directives/select-async-ds">简化下拉框物理分页</a>
@@ -65,24 +54,11 @@
         <div nz-row>
           <div nz-col nzSpan="12">
             <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-              <i
-                class="trigger"
-                nz-icon
-                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-              ></i>
+              <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
             </span>
           </div>
-          <div
-            nz-col
-            nzSpan="12"
-            style="text-align: right; padding-right: 16px;"
-          >
-            <a
-              nz-button
-              nzType="default"
-              target="_blank"
-              href="https://github.com/1-2-3/zorro-sharper"
-            >
+          <div nz-col nzSpan="12" style="text-align: right; padding-right: 16px">
+            <a nz-button nzType="default" target="_blank" href="https://github.com/1-2-3/zorro-sharper">
               <i nz-icon>
                 <svg
                   class="octicon octicon-mark-github v-align-middle"

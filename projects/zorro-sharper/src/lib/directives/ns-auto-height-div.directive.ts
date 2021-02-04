@@ -1,12 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  Input,
-  Renderer2,
-  OnInit,
-  AfterViewInit,
-  DoCheck,
-} from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2, OnInit, AfterViewInit, DoCheck } from '@angular/core';
 
 /**
  * 自适应页面高度的Div。
@@ -14,10 +6,10 @@ import {
  * 如果希望修改底部间距，可设置自定义间距值，例：<div ncFullHeightDiv="100">
  */
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: '[nsAutoHeightDiv]',
 })
-export class NsAutoHeightDivDirective
-  implements OnInit, AfterViewInit, DoCheck {
+export class NsAutoHeightDivDirective implements OnInit, AfterViewInit, DoCheck {
   private _offset = 27;
   private divTop = 0;
 

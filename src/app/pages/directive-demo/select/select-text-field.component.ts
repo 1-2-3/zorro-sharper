@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-select-text-field',
-  templateUrl: './select-text-field.component.html'
+  templateUrl: './select-text-field.component.html',
 })
 export class SelectTextFieldComponent implements OnInit {
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {}
@@ -18,9 +18,7 @@ export class SelectTextFieldComponent implements OnInit {
   submitJson = ''; // 提交的表单数据，演示用
 
   // 用户下拉框数据源
-  userDs = new SelectAsyncDs((pageNum, pageSize, query) =>
-    this.getUserList(pageNum, pageSize, query)
-  );
+  userDs = new SelectAsyncDs((pageNum, pageSize, query) => this.getUserList(pageNum, pageSize, query));
 
   randomUserUrl = 'https://api.randomuser.me/?results=10';
 
@@ -30,12 +28,12 @@ export class SelectTextFieldComponent implements OnInit {
   sexOptions = [
     {
       id: '1',
-      text: '男'
+      text: '男',
     },
     {
       id: '2',
-      text: '女'
-    }
+      text: '女',
+    },
   ];
 
   ngOnInit() {
@@ -44,7 +42,7 @@ export class SelectTextFieldComponent implements OnInit {
       userId: ['', []],
       userText: ['', []],
       sexId: ['', []],
-      sexText: ['', []]
+      sexText: ['', []],
     });
 
     // 模拟编辑表单时加载表单数据
@@ -53,26 +51,26 @@ export class SelectTextFieldComponent implements OnInit {
       this.userDs.appendOption(
         {
           name: {
-            title: formData.userText
+            title: formData.userText,
           },
           login: {
-            uuid: formData.userId
-          }
+            uuid: formData.userId,
+          },
         },
-        d => d.login.uuid
+        (d) => d.login.uuid,
       );
     });
   }
 
   // 模拟编辑表单时加载表单数据
   loadFormData(): Observable<any> {
-    return Observable.create(function(observer) {
+    return new Observable((observer) => {
       observer.next({
         id: 'e101',
         userId: 'u11',
         userText: '王老五',
         sexId: '2',
-        sexText: '女'
+        sexText: '女',
       });
     });
   }
