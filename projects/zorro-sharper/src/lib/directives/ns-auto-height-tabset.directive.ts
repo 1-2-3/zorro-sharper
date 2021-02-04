@@ -1,4 +1,5 @@
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2 } from "@angular/core";
+import { NzTabSetComponent } from "ng-zorro-antd/tabs";
 
 /**
  * 自适应页面高度的标签页。
@@ -6,19 +7,33 @@ import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
  * 如果希望修改底部间距，可设置自定义间距值，例：<nz-card nsAutoHeightTabset="100">
  */
 @Directive({
-  selector: '[nsAutoHeightTabset]',
+  selector: "[nsAutoHeightTabset]",
 })
 export class NsAutoHeightTabsetDirective {
   private _offset = 27;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+    private cmp: NzTabSetComponent
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.cmp && this.cmp.nzSelectChange) {
+      this.cmp.nzSelectChange.subscribe((index, tab) => {
+        this.resetHeightOfTabs();
+      });
+    }
+  }
 
   ngAfterViewInit() {
+    this.resetHeightOfTabs();
+  }
+
+  private resetHeightOfTabs() {
     setTimeout(() => {
       const tabset = this.el.nativeElement;
-      const tabpaneList = tabset.querySelectorAll('.ant-tabs-tabpane');
+      const tabpaneList = tabset.querySelectorAll(".ant-tabs-tabpane");
       for (const tabpane of tabpaneList) {
         let tabpaneTop = 0;
         if (
@@ -32,7 +47,7 @@ export class NsAutoHeightTabsetDirective {
         if (tabpane) {
           const topOffset = tabpaneTop + this._offset;
           tabpane.style.height = `calc(100vh - ${topOffset}px)`;
-          tabpane.style['overflow-y'] = 'auto'; // 自动出竖向滚动条
+          tabpane.style["overflow-y"] = "auto"; // 自动出竖向滚动条
         }
       }
     }, 2);

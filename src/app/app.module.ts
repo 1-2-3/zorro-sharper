@@ -14,6 +14,10 @@ import { registerLocaleData } from "@angular/common";
 import zh from "@angular/common/locales/zh";
 import { NsFormErrorTipService } from "projects/zorro-sharper/src/public-api";
 // import { NsFormErrorTipService } from "zorro-sharper";
+import { NzLayoutModule } from "ng-zorro-antd/layout";
+import { NzMenuModule } from "ng-zorro-antd/menu";
+import { NzGridModule } from "ng-zorro-antd/grid";
+import { NzIconModule } from "ng-zorro-antd/icon";
 
 registerLocaleData(zh);
 
@@ -27,6 +31,10 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzGridModule,
+    NzIconModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent],

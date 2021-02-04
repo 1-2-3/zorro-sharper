@@ -5,8 +5,8 @@ import {
   Input,
   HostListener,
   ChangeDetectorRef,
-} from "@angular/core";
-import { STComponent } from "@delon/abc/st";
+} from '@angular/core';
+import { STComponent } from '@delon/abc/st';
 
 /**
  * 根据SimpleTable内部Top位置，自动计算Scroll.height，达到自动出内部滚动条的效果。
@@ -15,11 +15,11 @@ import { STComponent } from "@delon/abc/st";
  * 需要自定义偏移量时，可使用：<st nsAutoHeightST="100"></st>
  */
 @Directive({
-  selector: "[nsAutoHeightST]",
+  selector: '[nsAutoHeightST]',
   host: {},
 })
 export class NsAutoHeightSTDirective {
-  @Input("nsAutoHeightST")
+  @Input('nsAutoHeightST')
   offset: number;
 
   constructor(
@@ -34,7 +34,7 @@ export class NsAutoHeightSTDirective {
    * 响应浏览器窗体大小变化
    * @param event
    */
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onResize() {
     this.doAutoSize();
   }
@@ -59,7 +59,7 @@ export class NsAutoHeightSTDirective {
                 this.element.nativeElement.parentElement.offsetHeight -
                 this.element.nativeElement.offsetTop -
                 offset
-              ).toString() + "px",
+              ).toString() + 'px',
             x: this.table.scroll.x,
           };
           this.cd.detectChanges();
@@ -70,7 +70,7 @@ export class NsAutoHeightSTDirective {
                 this.element.nativeElement.parentElement.offsetHeight -
                 this.element.nativeElement.offsetTop -
                 offset
-              ).toString() + "px",
+              ).toString() + 'px',
           };
           this.cd.detectChanges();
         }

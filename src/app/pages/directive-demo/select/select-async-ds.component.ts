@@ -33,7 +33,7 @@ export class SelectAsyncDsComponent implements OnInit {
 
   ngOnInit(): void {
     // 假设是编辑数据的情况，模拟需要加载默认的当前选中值
-    let user = {
+    const user = {
       name: {
         title: '王明阳'
       },

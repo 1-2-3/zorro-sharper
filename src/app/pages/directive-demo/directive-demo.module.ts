@@ -15,6 +15,16 @@ import { FormAutoFeedBackComponent } from "./form/form-auto-feedback.componnet";
 import { FlipCardDemoComponnet } from "./flip/flip-card-demo.componnet";
 import { SlideoutDemoComponent } from "./slideout/slideout-demo.component";
 import { SlideoutContentComponent } from "./slideout/slideout-content.component";
+import { NzGridModule } from "ng-zorro-antd/grid";
+import { NzInputModule } from "ng-zorro-antd/input";
+import { NzCardModule } from "ng-zorro-antd/card";
+import { NzTableModule } from "ng-zorro-antd/table";
+import { NzTabsModule } from "ng-zorro-antd/tabs";
+import { NzListModule } from "ng-zorro-antd/list";
+import { NzFormModule } from "ng-zorro-antd/form";
+import { NzSelectModule } from "ng-zorro-antd/select";
+import { NzButtonModule } from "ng-zorro-antd/button";
+import { NzIconModule } from "ng-zorro-antd/icon";
 
 @NgModule({
   imports: [
@@ -23,6 +33,16 @@ import { SlideoutContentComponent } from "./slideout/slideout-content.component"
     FormsModule,
     DirectiveDemoRoutingModule,
     ZorroSharperModule,
+    NzGridModule,
+    NzInputModule,
+    NzCardModule,
+    NzTableModule,
+    NzTabsModule,
+    NzListModule,
+    NzFormModule,
+    NzSelectModule,
+    NzButtonModule,
+    NzIconModule,
   ],
   declarations: [
     AutoHeightCardDemoComponent,
