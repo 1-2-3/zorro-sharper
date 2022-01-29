@@ -52,7 +52,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -103,13 +102,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -147,13 +139,6 @@
             "main": "projects/zorro-sharper/src/test.ts",
             "tsConfig": "projects/zorro-sharper/tsconfig.spec.json",
             "karmaConfig": "projects/zorro-sharper/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["projects/zorro-sharper/tsconfig.lib.json", "projects/zorro-sharper/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }
