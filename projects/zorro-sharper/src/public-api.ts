@@ -19,3 +19,4 @@ export * from './lib/directives/ns-flip-trigger.directive';
 export * from './lib/directives/ns-form-control.directive';
 export * from './lib/directives/ns-form-item.directive';
 export * from './lib/directives/ns-form-label.directive';
+export * from './lib/directives/ns-slideout.directive';
