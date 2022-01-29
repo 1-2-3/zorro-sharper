@@ -25,7 +25,7 @@ export class NsAutoHeightTableDirective implements OnInit, AfterViewInit {
   @Input('nsAutoHeightTable')
   offset: number;
 
-  constructor(private element: ElementRef, private table: NzTableComponent, private cd: ChangeDetectorRef) {
+  constructor(private element: ElementRef, private table: NzTableComponent<any>, private cd: ChangeDetectorRef) {
     // 当前页码改变时自动回到顶部
     if (this.table && this.table.nzPageIndexChange) {
       this.table.nzPageIndexChange.subscribe((index) => {
