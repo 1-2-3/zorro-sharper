@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, Renderer2, HostListener, OnInit, AfterViewInit } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2, HostListener, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
 /**
  * 自适应页面高度的Card。
@@ -9,8 +9,10 @@ import { Directive, ElementRef, Input, Renderer2, HostListener, OnInit, AfterVie
   // tslint:disable-next-line: directive-selector
   selector: '[nsAutoHeightCard]',
 })
-export class NsAutoHeightCardDirective implements OnInit, AfterViewInit {
+export class NsAutoHeightCardDirective implements OnInit, AfterViewInit, OnDestroy {
   private _offset = 27;
+  private resizeTimer: any = null;
+  private cachedBodyDiv: HTMLElement | null = null;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
@@ -21,17 +23,34 @@ export class NsAutoHeightCardDirective implements OnInit, AfterViewInit {
    */
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.doAutoSize();
+    // Debounce resize events to avoid excessive calculations
+    if (this.resizeTimer) {
+      clearTimeout(this.resizeTimer);
+    }
+    this.resizeTimer = setTimeout(() => {
+      this.doAutoSize();
+    }, 150);
   }
 
   ngAfterViewInit() {
     this.doAutoSize();
   }
 
+  ngOnDestroy() {
+    if (this.resizeTimer) {
+      clearTimeout(this.resizeTimer);
+    }
+  }
+
   private doAutoSize() {
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       const card = this.el.nativeElement;
-      const bodyDiv = card.querySelector('.ant-card-body');
+      // Cache the body div reference to avoid repeated querySelector calls
+      if (!this.cachedBodyDiv) {
+        this.cachedBodyDiv = card.querySelector('.ant-card-body');
+      }
+      const bodyDiv = this.cachedBodyDiv;
+
       let bodyTop = 0;
       if (bodyDiv && bodyDiv.getBoundingClientRect && bodyDiv.getBoundingClientRect().top) {
         bodyTop = bodyDiv.getBoundingClientRect().top;
@@ -42,7 +61,7 @@ export class NsAutoHeightCardDirective implements OnInit, AfterViewInit {
         bodyDiv.style.height = `calc(100vh - ${topOffset}px)`;
         bodyDiv.style['overflow-y'] = 'auto'; // 自动出竖向滚动条
       }
-    }, 2);
+    });
   }
 
   @Input()

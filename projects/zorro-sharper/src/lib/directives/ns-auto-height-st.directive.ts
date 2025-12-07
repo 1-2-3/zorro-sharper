@@ -7,6 +7,7 @@ import {
   ChangeDetectorRef,
   OnInit,
   AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
 import { STComponent } from '@delon/abc/st';
 
@@ -20,9 +21,11 @@ import { STComponent } from '@delon/abc/st';
   // tslint:disable-next-line: directive-selector
   selector: '[nsAutoHeightST]',
 })
-export class NsAutoHeightSTDirective implements OnInit, AfterViewInit {
+export class NsAutoHeightSTDirective implements OnInit, AfterViewInit, OnDestroy {
   @Input('nsAutoHeightST')
   offset: number;
+
+  private resizeTimer: any = null;
 
   constructor(private element: ElementRef, private table: STComponent, private cd: ChangeDetectorRef) {}
 
@@ -33,15 +36,27 @@ export class NsAutoHeightSTDirective implements OnInit, AfterViewInit {
    */
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.doAutoSize();
+    // Debounce resize events to avoid excessive calculations
+    if (this.resizeTimer) {
+      clearTimeout(this.resizeTimer);
+    }
+    this.resizeTimer = setTimeout(() => {
+      this.doAutoSize();
+    }, 150);
   }
 
   ngAfterViewInit() {
     this.doAutoSize();
   }
 
+  ngOnDestroy() {
+    if (this.resizeTimer) {
+      clearTimeout(this.resizeTimer);
+    }
+  }
+
   private doAutoSize() {
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       const offset = this.offset || 70;
       if (
         this.element &&
@@ -49,29 +64,19 @@ export class NsAutoHeightSTDirective implements OnInit, AfterViewInit {
         this.element.nativeElement.parentElement &&
         this.element.nativeElement.parentElement.offsetHeight
       ) {
-        if (this.table && this.table.scroll && this.table.scroll.x) {
+        const calculatedHeight =
+          this.element.nativeElement.parentElement.offsetHeight -
+          this.element.nativeElement.offsetTop -
+          offset;
+
+        if (this.table && this.table.scroll) {
           this.table.scroll = {
-            y:
-              (
-                this.element.nativeElement.parentElement.offsetHeight -
-                this.element.nativeElement.offsetTop -
-                offset
-              ).toString() + 'px',
-            x: this.table.scroll.x,
-          };
-          this.cd.detectChanges();
-        } else {
-          this.table.scroll = {
-            y:
-              (
-                this.element.nativeElement.parentElement.offsetHeight -
-                this.element.nativeElement.offsetTop -
-                offset
-              ).toString() + 'px',
+            ...this.table.scroll,
+            y: calculatedHeight.toString() + 'px',
           };
           this.cd.detectChanges();
         }
       }
-    }, 10);
+    });
   }
 }

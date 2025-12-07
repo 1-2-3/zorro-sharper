@@ -5,12 +5,12 @@ import {
   ViewContainerRef,
   Input,
   Renderer2,
-  DoCheck,
   AfterViewInit,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
 /**
  * 3D翻转卡片
@@ -19,13 +19,13 @@ import { throttleTime } from 'rxjs/operators';
   // tslint:disable-next-line: directive-selector
   selector: '[nsFlipH],[nsFlipV]',
 })
-export class NsFlipDirective implements OnInit, AfterViewInit, DoCheck {
+export class NsFlipDirective implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private _viewContainer: ViewContainerRef,
     private _templateRef: TemplateRef<void>,
     private _renderer: Renderer2,
   ) {
-    this._onResize$.pipe(throttleTime(2)).subscribe(() => {
+    this._onResize$.pipe(debounceTime(100)).subscribe(() => {
       // 将背面的位置和大小设置成与正面相同
       if (this._frontDiv && this._frontDiv.getBoundingClientRect) {
         const frontBound = this._frontDiv.getBoundingClientRect();
@@ -55,6 +55,7 @@ export class NsFlipDirective implements OnInit, AfterViewInit, DoCheck {
   private _onResize$ = new Subject<void>();
   private _backTpl: TemplateRef<void> = null;
   private _flipType: 'Horizontal' | 'Vertical' = 'Horizontal';
+  private _resizeObserver: ResizeObserver | null = null;
 
   private _senceDiv = null;
   private _cardDiv = null;
@@ -66,8 +67,11 @@ export class NsFlipDirective implements OnInit, AfterViewInit, DoCheck {
     this._updateView();
   }
 
-  ngDoCheck(): void {
-    this._onResize$.next();
+  ngOnDestroy(): void {
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+    }
+    this._onResize$.complete();
   }
 
   ngAfterViewInit(): void {
@@ -91,6 +95,18 @@ export class NsFlipDirective implements OnInit, AfterViewInit, DoCheck {
         e.stopPropagation();
         this.flipCardH();
       });
+    }
+
+    // Use ResizeObserver instead of DoCheck for better performance
+    this.setupResizeObserver();
+  }
+
+  private setupResizeObserver(): void {
+    if (typeof ResizeObserver !== 'undefined' && this._frontDiv) {
+      this._resizeObserver = new ResizeObserver(() => {
+        this._onResize$.next();
+      });
+      this._resizeObserver.observe(this._frontDiv);
     }
   }
 

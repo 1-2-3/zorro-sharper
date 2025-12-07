@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnInit, Renderer2, OnDestroy } from '@angular/core';
 import { NzTabSetComponent } from 'ng-zorro-antd/tabs';
 
 /**
@@ -10,8 +10,10 @@ import { NzTabSetComponent } from 'ng-zorro-antd/tabs';
   // tslint:disable-next-line: directive-selector
   selector: '[nsAutoHeightTabset]',
 })
-export class NsAutoHeightTabsetDirective implements OnInit, AfterViewInit {
+export class NsAutoHeightTabsetDirective implements OnInit, AfterViewInit, OnDestroy {
   private _offset = 27;
+  private resizeTimer: any = null;
+  private cachedTabpanes: NodeListOf<Element> | null = null;
 
   constructor(private el: ElementRef, private renderer: Renderer2, private cmp: NzTabSetComponent) {}
 
@@ -27,19 +29,36 @@ export class NsAutoHeightTabsetDirective implements OnInit, AfterViewInit {
     this.resetHeightOfTabs();
   }
 
+  ngOnDestroy() {
+    if (this.resizeTimer) {
+      clearTimeout(this.resizeTimer);
+    }
+  }
+
   /**
    * 响应浏览器窗体大小变化
    */
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.resetHeightOfTabs();
+    // Debounce resize events to avoid excessive calculations
+    if (this.resizeTimer) {
+      clearTimeout(this.resizeTimer);
+    }
+    this.resizeTimer = setTimeout(() => {
+      this.resetHeightOfTabs();
+    }, 150);
   }
 
   private resetHeightOfTabs() {
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       const tabset = this.el.nativeElement;
-      const tabpaneList = tabset.querySelectorAll('.ant-tabs-tabpane');
-      for (const tabpane of tabpaneList) {
+      // Cache tabpanes to avoid repeated querySelectorAll calls
+      if (!this.cachedTabpanes) {
+        this.cachedTabpanes = tabset.querySelectorAll('.ant-tabs-tabpane');
+      }
+      const tabpaneList = this.cachedTabpanes;
+
+      for (const tabpane of Array.from(tabpaneList)) {
         let tabpaneTop = 0;
         if (tabpane && tabpane.getBoundingClientRect && tabpane.getBoundingClientRect().top) {
           tabpaneTop = tabpane.getBoundingClientRect().top;
@@ -47,11 +66,11 @@ export class NsAutoHeightTabsetDirective implements OnInit, AfterViewInit {
 
         if (tabpane) {
           const topOffset = tabpaneTop + this._offset;
-          tabpane.style.height = `calc(100vh - ${topOffset}px)`;
-          tabpane.style['overflow-y'] = 'auto'; // 自动出竖向滚动条
+          (tabpane as HTMLElement).style.height = `calc(100vh - ${topOffset}px)`;
+          (tabpane as HTMLElement).style['overflow-y'] = 'auto'; // 自动出竖向滚动条
         }
       }
-    }, 2);
+    });
   }
 
   @Input()

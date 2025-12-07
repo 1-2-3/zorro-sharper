@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, Renderer2, OnInit, AfterViewInit, DoCheck } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2, OnInit, AfterViewInit, HostListener, OnDestroy } from '@angular/core';
 
 /**
  * 自适应页面高度的Div。
@@ -9,29 +9,44 @@ import { Directive, ElementRef, Input, Renderer2, OnInit, AfterViewInit, DoCheck
   // tslint:disable-next-line: directive-selector
   selector: '[nsAutoHeightDiv]',
 })
-export class NsAutoHeightDivDirective implements OnInit, AfterViewInit, DoCheck {
+export class NsAutoHeightDivDirective implements OnInit, AfterViewInit, OnDestroy {
   private _offset = 27;
   private divTop = 0;
+  private resizeObserver: ResizeObserver | null = null;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {}
 
-  ngDoCheck(): void {
-    const div = this.el.nativeElement;
-    if (div && div.getBoundingClientRect && div.getBoundingClientRect().top) {
-      const currentDivTop = div.getBoundingClientRect().top;
-
-      if (this.divTop !== currentDivTop) {
-        this.resizeToFitContent();
-      }
-    }
+  /**
+   * 响应浏览器窗体大小变化
+   */
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.resizeToFitContent();
   }
 
   ngAfterViewInit() {
     Promise.resolve().then(() => {
       this.resizeToFitContent();
+      this.setupResizeObserver();
     });
+  }
+
+  ngOnDestroy() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  }
+
+  private setupResizeObserver() {
+    // Use ResizeObserver to detect when parent container size changes
+    if (typeof ResizeObserver !== 'undefined' && this.el.nativeElement.parentElement) {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.resizeToFitContent();
+      });
+      this.resizeObserver.observe(this.el.nativeElement.parentElement);
+    }
   }
 
   private resizeToFitContent() {
