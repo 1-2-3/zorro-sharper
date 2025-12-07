@@ -20,6 +20,8 @@ export class NsAutoHeightTabsetDirective implements OnInit, AfterViewInit, OnDes
   ngOnInit() {
     if (this.cmp && this.cmp.nzSelectChange) {
       this.cmp.nzSelectChange.subscribe((index, tab) => {
+        // Invalidate cache when switching tabs as the DOM structure might have changed
+        this.cachedTabpanes = null;
         this.resetHeightOfTabs();
       });
     }
@@ -58,7 +60,7 @@ export class NsAutoHeightTabsetDirective implements OnInit, AfterViewInit, OnDes
       }
       const tabpaneList = this.cachedTabpanes;
 
-      for (const tabpane of Array.from(tabpaneList)) {
+      for (const tabpane of tabpaneList) {
         let tabpaneTop = 0;
         if (tabpane && tabpane.getBoundingClientRect && tabpane.getBoundingClientRect().top) {
           tabpaneTop = tabpane.getBoundingClientRect().top;

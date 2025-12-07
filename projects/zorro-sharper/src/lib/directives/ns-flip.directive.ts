@@ -104,7 +104,10 @@ export class NsFlipDirective implements OnInit, AfterViewInit, OnDestroy {
   private setupResizeObserver(): void {
     if (typeof ResizeObserver !== 'undefined' && this._frontDiv) {
       this._resizeObserver = new ResizeObserver(() => {
-        this._onResize$.next();
+        // Check if element still exists before triggering resize
+        if (this._frontDiv) {
+          this._onResize$.next();
+        }
       });
       this._resizeObserver.observe(this._frontDiv);
     }
