@@ -41,10 +41,13 @@ export class NsAutoHeightDivDirective implements OnInit, AfterViewInit, OnDestro
 
   private setupResizeObserver() {
     // Use ResizeObserver to detect when parent container size changes
-    if (typeof ResizeObserver !== 'undefined' && this.el.nativeElement.parentElement) {
+    if (typeof ResizeObserver !== 'undefined' &&
+        this.el &&
+        this.el.nativeElement &&
+        this.el.nativeElement.parentElement) {
       this.resizeObserver = new ResizeObserver(() => {
         // Verify parent still exists before resizing
-        if (this.el.nativeElement.parentElement) {
+        if (this.el && this.el.nativeElement && this.el.nativeElement.parentElement) {
           this.resizeToFitContent();
         }
       });

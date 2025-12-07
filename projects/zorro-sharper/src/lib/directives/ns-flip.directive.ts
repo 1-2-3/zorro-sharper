@@ -25,7 +25,7 @@ export class NsFlipDirective implements OnInit, AfterViewInit, OnDestroy {
     private _templateRef: TemplateRef<void>,
     private _renderer: Renderer2,
   ) {
-    this._onResize$.pipe(debounceTime(100)).subscribe(() => {
+    this._onResize$.pipe(debounceTime(50)).subscribe(() => {
       // 将背面的位置和大小设置成与正面相同
       if (this._frontDiv && this._frontDiv.getBoundingClientRect) {
         const frontBound = this._frontDiv.getBoundingClientRect();
@@ -104,8 +104,8 @@ export class NsFlipDirective implements OnInit, AfterViewInit, OnDestroy {
   private setupResizeObserver(): void {
     if (typeof ResizeObserver !== 'undefined' && this._frontDiv) {
       this._resizeObserver = new ResizeObserver(() => {
-        // Check if element still exists before triggering resize
-        if (this._frontDiv) {
+        // Check if element still exists and is connected to DOM before triggering resize
+        if (this._frontDiv && (this._frontDiv as any).isConnected !== false) {
           this._onResize$.next();
         }
       });
